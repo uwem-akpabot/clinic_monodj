@@ -16,21 +16,24 @@ def index(request):
 	return render(request, 'frontend/homepage.html', {'patients': patients, 'company': COMPANY})
 
 def dashboard(request):
-	patients = Patient.objects.all()
-	count_patients = Patient.objects.count()
+	# patients = Patient.objects.all()
+	# count_patients = Patient.objects.count()
 
-	count_doctors = Doctor.objects.count() 
-	count_labscientists = Labscientist.objects.count()
-	count_nurses = Nurse.objects.count()  
-	count_pharmacists = Pharmacist.objects.count() 
-	count_users = count_patients.count() + count_doctors.count() + count_labscientists.count() + count_nurses.count() + count_pharmacists.count()
+	# count_doctors = Doctor.objects.count() 
+	# count_labscientists = Labscientist.objects.count()
+	# count_nurses = Nurse.objects.count()  
+	# count_pharmacists = Pharmacist.objects.count() 
+	# count_users = count_patients.count() + count_doctors.count() + count_labscientists.count() + count_nurses.count() + count_pharmacists.count()
 
 	# company_account = Company_account.objects.latest('id')
 	# print(company_account)
 
-	return render(request, 'frontend/dashboard.html', {'patients': patients, 'count_patients': count_patients, 
-		'count_users': count_users, 'count_doctors': count_doctors, 'count_labscientists': count_labscientists, 
-		'count_nurses': count_nurses, 'count_pharmacists': count_pharmacists, 'company': COMPANY})
+	# return render(request, 'frontend/dashboard.html', {'patients': patients, 'count_patients': count_patients, 
+	# 	'count_users': count_users, 'count_doctors': count_doctors, 'count_labscientists': count_labscientists, 
+	# 	'count_nurses': count_nurses, 'count_pharmacists': count_pharmacists, 'company': COMPANY})
+
+	return render(request, 'frontend/dashboard.html', {'company': COMPANY})
+
 	#return redirect('login')
 
 @login_required
