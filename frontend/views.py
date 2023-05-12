@@ -16,7 +16,9 @@ def index(request):
 	return render(request, 'frontend/homepage.html', {'patients': patients, 'company': COMPANY})
 
 def dashboard(request):
-	# patients = Patient.objects.all()
+	patients = Patient.objects.all()
+	return render(request, 'frontend/dashboard.html', {'company': COMPANY})
+
 	# count_patients = Patient.objects.count()
 
 	# count_doctors = Doctor.objects.count() 
@@ -32,53 +34,63 @@ def dashboard(request):
 	# 	'count_users': count_users, 'count_doctors': count_doctors, 'count_labscientists': count_labscientists, 
 	# 	'count_nurses': count_nurses, 'count_pharmacists': count_pharmacists, 'company': COMPANY})
 
-	return render(request, 'frontend/dashboard.html', {'company': COMPANY})
+	# return render(request, 'frontend/dashboard.html', {'company': COMPANY})
 
 	#return redirect('login')
 
 @login_required
 def create_account(request):
-	pass
-	# if request.method == 'POST':
-	# 	form = UserCreationForm(request.POST)
+	if request.method == 'POST':
+		form = UserCreationForm(request.POST)
 
-	# 	if form.is_valid():
-	# 		user = form.save()
-	# 		account_type = request.POST.get('account_type', 'customer')
-	# 		first_name = request.POST.get('first_name')
-	# 		last_name = request.POST.get('last_name')
-	# 		name = f"{first_name} {last_name}"
-	# 		created_by = request.POST.get('created_by')
+		if form.is_valid():
+			user = form.save()
+			account_type = request.POST.get('account_type', 'nurse')
+			first_name = request.POST.get('first_name')
+			last_name = request.POST.get('last_name')
+			name = f"{first_name} {last_name}"
+			created_by = request.POST.get('created_by')
 
-	# 		if account_type == 'mgr':
-	# 			userprofile = Userprofile.objects.create(user=user, is_mgr=True, first_name=first_name, last_name=last_name, created_by=created_by)
-	# 			managerprofile = Manager.objects.create(user=user, name=name, created_by=created_by)
-	# 			userprofile.save()
-	# 			managerprofile.save()
-	# 		elif account_type == 'teller':
-	# 			userprofile = Userprofile.objects.create(user=user, is_teller=True, first_name=first_name, last_name=last_name, created_by=created_by)
-	# 			tellerprofile = Teller.objects.create(user=user, name=name, created_by=created_by)
-	# 			userprofile.save()
-	# 			tellerprofile.save()
-	# 		else:
-	# 			userprofile = Userprofile.objects.create(user=user, is_cust=True, first_name=first_name, last_name=last_name, created_by=created_by)
-	# 			customerprofile = Customer.objects.create(user=user, name=name, created_by=created_by)
-	# 			userprofile.save()
-	# 			customerprofile.save()
+			if account_type == 'doc':
+				userprofile = Userprofile.objects.create(user=user, is_mgr=True, first_name=first_name, last_name=last_name, created_by=created_by)
+				doctorprofile = Doctor.objects.create(user=user, name=name, created_by=created_by)
+				userprofile.save()
+				doctorprofile.save()
+			elif account_type == 'lab':
+				userprofile = Userprofile.objects.create(user=user, is_teller=True, first_name=first_name, last_name=last_name, created_by=created_by)
+				labprofile = Labscientist.objects.create(user=user, name=name, created_by=created_by)
+				userprofile.save()
+				labprofile.save()
+			elif account_type == 'nrs':
+				userprofile = Userprofile.objects.create(user=user, is_teller=True, first_name=first_name, last_name=last_name, created_by=created_by)
+				nrsprofile = Nurse.objects.create(user=user, name=name, created_by=created_by)
+				userprofile.save()
+				nrsprofile.save()
+			elif account_type == 'pharm':
+				userprofile = Userprofile.objects.create(user=user, is_teller=True, first_name=first_name, last_name=last_name, created_by=created_by)
+				pharmprofile = Pharmacist.objects.create(user=user, name=name, created_by=created_by)
+				userprofile.save()
+				pharmprofile.save()
+			else:
+				pass
+				# userprofile = Userprofile.objects.create(user=user, is_cust=True, first_name=first_name, last_name=last_name, created_by=created_by)
+				# customerprofile = Customer.objects.create(user=user, name=name, created_by=created_by)
+				# userprofile.save()
+				# customerprofile.save()
 
-	# 		msg_title = 'New Record!'
-	# 		msg_text = 'User has been created successfully!'
-	# 		messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
+			msg_title = 'New Record!'
+			msg_text = 'User has been created successfully!'
+			messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
 
-	# 		#login(request, user)
-	# 		#return redirect('index')
-	# 		return redirect('create_account')
+			#login(request, user)
+			#return redirect('index')
+			return redirect('create_account')
 
-	# 	else:
-	# 		msg_title = 'Error!'
-	# 		msg_text = 'Record was NOT saved!'
-	# 		messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
+		else:
+			msg_title = 'Error!'
+			msg_text = 'Record was NOT saved!'
+			messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
 
-	# else:
-	# 	form = UserCreationForm()
-	# return render(request, 'frontend/create_account.html', {'form': form, 'company': COMPANY})
+	else:
+		form = UserCreationForm()
+	return render(request, 'frontend/create_account.html', {'form': form, 'company': COMPANY})
