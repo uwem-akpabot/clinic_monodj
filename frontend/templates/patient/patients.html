@@ -1,0 +1,124 @@
+{% extends 'frontend/base.html' %}
+
+{% block title %}Register Patient{% endblock %}
+{% load static %}
+
+{% block content %}
+<div class="content-wrapper">
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+      <div class="col-xl">
+      <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Patients / <small class="text-primary text-normal">{{company|slice:"0:19"}}</small></h5>
+        </div>
+      
+          <div class="table-responsive text-nowrap">
+            <table class="table table-hover table-striped">
+              <thead>
+                <tr>
+                  <th>Patient</th>
+                  <th>Sex</th>
+                  <th>Phone</th>
+                  <th>Status</th>
+                  <th>Contact Person</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody class="table-border-bottom-0">
+                {% for pat in patients %}
+                <tr>
+                  <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{pat.fname}} {{pat.sname}}</strong></td>
+                  <td>{{pat.gender|slice:"0:1"}}</td>
+                  <td>{{pat.phone|slice:"0:11"}}</td>
+                  <td><span class="badge bg-label-success me-1">Active</span></td>
+                  <td>{{pat.contact_person|slice:"0:10"}} {{pat.contact_person_phone|slice:"0:11"}}</td>
+                  <td>
+                    <div class="dropdown">
+                      <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                        <i class="bx bx-dots-vertical-rounded"></i>
+                      </button>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="javascript:void(0);"
+                          ><i class="bx bx-edit-alt me-1"></i> Edit</a
+                        >
+                        <a class="dropdown-item" href="javascript:void(0);"
+                          ><i class="bx bx-trash me-1"></i> Delete</a
+                        >
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+    </div>
+   </div>
+  </div>
+</div>
+        
+<!--<div class="card-body">
+    <form method="POST" action=".">
+        {% csrf_token %}
+    <div class="row">
+        <div class="mb-3 col-md-6">
+        <label for="firstName" class="form-label">First Name <span class="asterisk">*</span></label>
+        <input class="form-control" type="text" name="fname" placeholder="John"  maxLength="40" 
+            required />
+            {errors.fname && <small class="text-danger text-xs font-italic">First Name is required</small>}
+        </div>
+
+        <div class="mb-3 col-md-6">
+        <label for="lastName" class="form-label">Surname <span class="asterisk">*</span></label>
+        <input class="form-control" type="text" name="sname" placeholder="Doe" maxLength="20" required />
+            {errors.sname && <small class="text-danger text-xs font-italic">Surname is required</small>}
+        </div>
+
+        <div class="mb-3 col-md-6">
+        <label for="lastName" class="form-label">Gender <span class="asterisk">*</span></label>
+        <select class="select2 form-select" name="gender" required >
+            <option value="">- Choose -</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+        {errors.gender && <small class="text-danger text-xs font-italic">Gender is required</small>}
+        </div>
+        
+        <div class="mb-3 col-md-6">
+        <label for="organization" class="form-label">Address</label>
+        <input type="text" class="form-control" name="address" placeholder="123 Sample Street, Allen Avenue, Ikeja, Lagos" />
+        </div>
+
+        <div class="mb-3 col-md-6">
+        <label class="form-label" for="phoneNumber">Phone Number</label>
+        <div class="input-group input-group-merge">
+            <span class="input-group-text">NG (+234)</span>
+            <input type="text" name="phone" class="form-control" placeholder="803 456 7890" maxLength="12" />
+        </div>
+        </div>
+
+        <div class="mb-3 col-md-6">
+        <label for="email" class="form-label">E-mail</label>
+        <input class="form-control" type="email" name="email" placeholder="john.doe@example.com" maxLength="40" />
+        </div>
+
+        <div class="mb-3 col-md-6">
+        <label for="lastName" class="form-label">Contact Person's Name</label>
+        <input class="form-control" type="text" name="contact_person" placeholder="e.g. Brother's name ..." maxLength="40" />
+        </div>
+
+        <div class="mb-3 col-md-6">
+        <label for="lastName" class="form-label">Contact Person's Phone</label>
+        <input class="form-control" type="text" name="contact_person_phone" placeholder="e.g. Brother's phone no. ..." maxLength="30" />
+        </div>
+        
+    </div>
+    <div class="mt-2">
+        <button class="btn btn-primary me-2">Save Record</button>
+        <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+    </div>
+    </form>
+</div> -->
+
+{% endblock %}

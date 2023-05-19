@@ -25,16 +25,21 @@ def register_patient(request):
 			msg_text = 'Patient is saved successfully!'
 			messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
 			return redirect('register_patient')
-
 		else:
 			msg_title = 'Error!'
 			msg_text = 'Record was NOT saved!'
 			messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
-
 	else:
 		form = AddPatientForm() #if submit is not clicked, display empty form
 
 	return render(request, 'patient/register_patient.html', {'form': form, 'company':company, 'patient':patient})
+
+
+@login_required
+def patients(request):
+	patients = Patient.objects.all()
+	return render(request,'patient/patients.html', {'company':company, 'patients': patients})
+
 
 """
 
@@ -43,7 +48,6 @@ def contribution_percustomer(request, customer_id):
 	contrb_percustomer = Contribution.objects.filter(customer_id=customer_id)
 	customer = Customer.objects.get(pk=customer_id)
 	return render(request,'contribution/contrb_percustomer.html', {'company':company, 'contrb_percustomer': contrb_percustomer, 'customer': customer})
-
 
 @login_required
 def contribution(request):
