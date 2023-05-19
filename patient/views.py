@@ -13,12 +13,18 @@ def register_patient(request):
 	patient = Patient.objects.all()
 
 	if request.method == 'POST':
+		# user_id = 
 		form = AddPatientForm(request.POST) #if submit is click and form method is POST
 		#print(request.POST.get(customer_id))
 		if form.is_valid():
 			patient = form.save() #1. Save filled form record to Contribution table
-			patient = request.POST.get('patient') #Grab the selected customer id while filling AddContribution form
+			# patient = request.POST.get('patient') #Grab the selected customer id while filling AddContribution form
 			# transaction = request.POST.get('transaction') #Grab the selected descriptn while filling AddContribution form
+
+			msg_title = 'New Record!'
+			msg_text = 'Patient is saved successfully!'
+			messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
+			return redirect('register_patient')
 
 		else:
 			msg_title = 'Error!'
