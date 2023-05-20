@@ -1,24 +1,17 @@
 from django import forms
-from .models import Customer, Teller, Manager
 
-class AddCustomerForm(forms.ModelForm):
-	class Meta:
-		model = Customer
-		fields = ['name', 'gender', 'tel', 'payment_plan', 'branch', 'package', 'business_addr', 
-			'home_addr', 'acct_bank', 'acct_name', 'acct_no', 'kin_name', 
-			'kin_tel', 'kin_relationship'
-		]
+# class RequestLabtestForm(forms.ModelForm):
+# 	class Meta:
+# 		model = SoapNotes
+# 		fields = ['patient', 'date_of_visit', 'biochemistry', 'haematology', 'microbiology']
+	    
+# class WriteNoteForm(forms.ModelForm):
+# 	class Meta:
+# 		model = Doctor
+# 		fields = ['patient', 'date_of_visit', 'subjective', 'objective', 'assessment', 'plan', 'comments']
 
-class AddTellerForm(forms.ModelForm):
-	class Meta:
-		model = Teller
-		fields = ['name', 'gender', 'tel', 'home_addr', 'acct_bank', 'acct_name', 
-			'acct_no', 'kin_name', 'kin_tel', 'kin_relationship'
-		]
-
-class AddManagerForm(forms.ModelForm):
-	class Meta:
-		model = Manager
-		fields = ['name', 'gender', 'tel', 'home_addr', 'acct_bank', 'acct_name', 
-			'acct_no', 'kin_name', 'kin_tel', 'kin_relationship'
-		]
+# class WriteNoteForm(forms.ModelForm):
+# 	class Meta:
+# 		model = Doctor
+# 		fields = ['patient', 'date_of_visit', 'subjective', 'objective', 'assessment', 'plan', 'comments']
+	    

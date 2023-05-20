@@ -1,6 +1,6 @@
 {% extends 'frontend/base.html' %}
 
-{% block title %}Register Patient{% endblock %}
+{% block title %}Patients{% endblock %}
 {% load static %}
 
 {% block content %}
@@ -22,7 +22,9 @@
                   <th>Phone</th>
                   <th>Status</th>
                   <th>Contact Person</th>
-                  <th>Actions</th>
+                  {% if user.userprofile.is_admin %}
+                    <th>Actions</th>
+                  {% endif %}
                 </tr>
               </thead>
               <tbody class="table-border-bottom-0">
@@ -33,6 +35,8 @@
                   <td>{{pat.phone|slice:"0:11"}}</td>
                   <td><span class="badge bg-label-success me-1">Active</span></td>
                   <td>{{pat.contact_person|slice:"0:10"}} {{pat.contact_person_phone|slice:"0:11"}}</td>
+                  
+                  {% if user.userprofile.is_admin %}
                   <td>
                     <div class="dropdown">
                       <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -48,6 +52,7 @@
                       </div>
                     </div>
                   </td>
+                  {% endif %}
                 </tr>
                 {% endfor %}
               </tbody>

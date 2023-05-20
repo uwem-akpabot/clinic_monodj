@@ -24,4 +24,5 @@ urlpatterns = [
     path('userprofile/', include('userprofile.urls')),
     path('users/', include('personnel.urls')), # for all users incl. customer, teller, manager
     path('patients/', include('patient.urls')), 
+    # path('*'), url that does not exist
 ]

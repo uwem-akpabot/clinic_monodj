@@ -64,19 +64,17 @@
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/dashboards-analytics.js' %}"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+    <script src="{% static 'js/sweet.min.js' %}"></script>
     <script>
-      {% if messages %}
-        {% for message in messages %}
-          swal({
-            title: "{{message.extra_tags}}!",
-            text: "{{message}}",
-            icon: "success",
-            button: "Ok!"
-          });
-        {% endfor %}
-      {% endif %}
+      {% for msg in messages %}
+        swal({
+          title: "{{msg.extra_tags}}!",
+          text: "{{msg}}",
+          icon: "success",
+          button: "Ok"
+        })
+      {% endfor %}
     </script>
   </body>
-
 </html>

@@ -1,19 +1,18 @@
 {% load static %}
 
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-custom">
-	<div className="app-brand demo" style="padding-top:10px;">
-		<a href="" className="app-brand-link" style="margin-left:30px;">
-		  <span className="app-brand-logo demo">
-		  <img src="{% static 'images/logo.png' %}" className="header-brand-img" alt="Logo" style="width:50px" /> 
+	<div class="app-brand demo">
+		<a href="" class="app-brand-link">
+		  <span class="app-brand-logo demo">
+		  <img src="{% static 'images/logo.png' %}" class="header-brand-img" alt="lavalite" style="width:50px" /> 
 		  </span>
-		  <span className="app-brand-text demo menu-text fw-bolder ms-2 text-capitalize" style="font-size:25px; color:violet"><b>{{company|slice:"0:8"}}</b></span>
+		  <span class="app-brand-text demo menu-text fw-bolder ms-2 text-white text-capitalize">{{company|slice:"0:8"}}</span>
 		</a>
 
-		<a href="javascript:void(0);" className="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-		  <i className="bx bx-chevron-left bx-sm align-middle"></i>
+		<a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+		  <i class="bx bx-chevron-left bx-sm align-middle"></i>
 		</a>
-	</div><br />
-
+	</div>
 	<div class="menu-inner-shadow"></div>
 
 	<ul class="menu-inner py-1">
@@ -44,11 +43,12 @@
 			</a>
 		  </li>
 		</ul>
-	  </li>
-
+	  </li>  
 	  <li class="menu-header small text-uppercase">
 		<span class="menu-header-text">Users</span>
 	  </li>
+
+	  {% if user.userprofile.is_doc or user.userprofile.is_admin %}
 	  <li class="menu-item">
 		<a href="javascript:void(0);" class="menu-link menu-toggle">
 		  <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -56,22 +56,52 @@
 		</a>
 		<ul class="menu-sub">
 		  <li class="menu-item">
-			<a href="pages-account-settings-account.html" class="menu-link">
-			  <div data-i18n="Account">Item 1</div>
+			<a href="{% url 'write_note_soap' %}" class="menu-link">
+			  <div data-i18n="Account">Write Note (S.O.A.P)</div>
 			</a>
 		  </li>
 		  <li class="menu-item">
-			<a href="pages-account-settings-notifications.html" class="menu-link">
-			  <div data-i18n="Notifications">Item 2</div>
+			<a href="{% url 'view_notes_soap' %}" class="menu-link">
+			  <div data-i18n="Notifications">View Notes (S.O.A.P)</div>
 			</a>
 		  </li>
 		  <li class="menu-item">
-			<a href="pages-account-settings-connections.html" class="menu-link">
-			  <div data-i18n="Connections">Item 3</div>
+			<!-- <a href="request_labtest_lab" class="menu-link"> -->
+			<a href="" class="menu-link">
+			  <div data-i18n="Connections">Request Labtest (Lab)</div>
+			</a>
+		  </li>
+		  <li class="menu-item">
+			<!-- <a href="view_testresult_lab" class="menu-link"> -->
+			<a href="" class="menu-link">
+			  <div data-i18n="Connections">View TestResult (Lab)</div>
+			</a>
+		  </li>
+
+		  <li class="menu-item">
+			<!-- <a href="request_triage_nurse" class="menu-link"> -->
+			<a href="" class="menu-link">
+			  <div data-i18n="Connections">Request Triage (Nurse)</div>
+			</a>
+		  </li>
+		  <li class="menu-item">
+			<!-- <a href="view_triage_nurse" class="menu-link"> -->
+			<a href="" class="menu-link">
+			  <div data-i18n="Connections">View Triage (Nurse)</div>
+			</a>
+		  </li>
+
+		  <li class="menu-item">
+			<!-- <a href="request_drug_pharm" class="menu-link"> -->
+			<a href="" class="menu-link">
+			  <div data-i18n="Connections">Request Drug (Pharm)</div>
 			</a>
 		  </li>
 		</ul>
 	  </li>
+	  {% endif %}
+
+	  {% if user.userprofile.is_lab or user.userprofile.is_admin %}
 	  <li class="menu-item">
 		<a href="javascript:void(0);" class="menu-link menu-toggle">
 		  <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
@@ -79,17 +109,20 @@
 		</a>
 		<ul class="menu-sub">
 		  <li class="menu-item">
-			<a href="auth-login-basic.html" class="menu-link" target="_blank">
-			  <div data-i18n="Basic">Item 1</div>
+			<a href="{% url 'record_labresult' %}" class="menu-link" target="_blank">
+			  <div data-i18n="Basic">Record Lab.Result</div>
 			</a>
 		  </li>
 		  <li class="menu-item">
-			<a href="auth-register-basic.html" class="menu-link" target="_blank">
-			  <div data-i18n="Basic">Item 2</div>
+			<a href="{% url 'view_labresult' %}" class="menu-link" target="_blank">
+			  <div data-i18n="Basic">View Lab.Result</div>
 			</a>
 		  </li>
 		</ul>
 	  </li>
+	  {% endif %}
+
+	  {% if user.userprofile.is_nurse or user.userprofile.is_admin %}
 	  <li class="menu-item">
 		<a href="javascript:void(0);" class="menu-link menu-toggle">
 		  <i class="menu-icon tf-icons bx bx-cube-alt"></i>
@@ -97,17 +130,20 @@
 		</a>
 		<ul class="menu-sub">
 		  <li class="menu-item">
-			<a href="pages-misc-error.html" class="menu-link">
-			  <div data-i18n="Error">Item 1</div>
+			<a href="{% url 'record_triage' %}" class="menu-link">
+			  <div data-i18n="Error">Record Triage</div>
 			</a>
 		  </li>
 		  <li class="menu-item">
-			<a href="pages-misc-under-maintenance.html" class="menu-link">
-			  <div data-i18n="Under Maintenance">Item 2</div>
+			<a href="{% url 'view_triage' %}" class="menu-link">
+			  <div data-i18n="Error">View Triage</div>
 			</a>
 		  </li>
 		</ul>
 	  </li>
+	  {% endif %}
+
+	  {% if user.userprofile.is_pharm or user.userprofile.is_admin %}
 	  <li class="menu-item">
 		<a href="javascript:void(0)" class="menu-link menu-toggle">
 		  <i class="menu-icon tf-icons bx bx-box"></i>
@@ -115,22 +151,18 @@
 		</a>
 		<ul class="menu-sub">
 		  <li class="menu-item">
-			<a href="ui-accordion.html" class="menu-link">
-			  <div data-i18n="Accordion">Item 1</div>
+			<a href="{% url 'dispense_drugs' %}" class="menu-link">
+			  <div data-i18n="Accordion">Dispense Drugs</div>
 			</a>
 		  </li>
 		  <li class="menu-item">
-			<a href="ui-alerts.html" class="menu-link">
-			  <div data-i18n="Alerts">Item 2</div>
-			</a>
-		  </li>
-		  <li class="menu-item">
-			<a href="ui-badges.html" class="menu-link">
-			  <div data-i18n="Badges">Item 3</div>
+			<a href="{% url 'view_dispensed' %}" class="menu-link">
+			  <div data-i18n="Accordion">View Dispensed</div>
 			</a>
 		  </li>
 		</ul>
 	  </li>
+	  {% endif %}
 
 	  <!-- <li class="menu-item">
 		<a href="javascript:void(0)" class="menu-link menu-toggle">
@@ -152,8 +184,17 @@
 	  </li> -->
 
 	  <!-- Components -->
-	  <li class="menu-header small text-uppercase"><span class="menu-header-text">Others</span></li>
-	  <!-- Cards -->
+	  <li class="menu-header small text-uppercase"><span class="menu-header-text">More</span></li>
+	  
+	  {% if user.userprofile.is_admin %}
+	  <li class="menu-item">
+		<a href="{% url 'create_account' %}" class="menu-link">
+		  <i class="menu-icon tf-icons bx bx-copy"></i>
+		  <div data-i18n="Connections">Create User</div>
+		</a>
+	  </li>
+	  {% endif %}
+
 	  <li class="menu-item">
 		<a href="{% url 'logout' %}" class="menu-link">
 		  <i class="menu-icon tf-icons bx bx-collection"></i>

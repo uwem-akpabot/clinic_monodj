@@ -3,6 +3,7 @@ from django.db import models
 
 class Userprofile(models.Model):
 	user = models.OneToOneField(User, related_name='Userprofile', on_delete=models.CASCADE)
+	is_admin = models.BooleanField(default=False)
 	is_doc = models.BooleanField(default=False)
 	is_lab = models.BooleanField(default=False)
 	is_nurse = models.BooleanField(default=False)

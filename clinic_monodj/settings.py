@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'frontend',
     'personnel',
     'patient',
+    'record',
 ]
 
 MIDDLEWARE = [

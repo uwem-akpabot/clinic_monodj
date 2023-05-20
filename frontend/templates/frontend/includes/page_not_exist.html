@@ -1,0 +1,22 @@
+<div class="content-wrapper">
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+      <div class="col-xl">
+      <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Page does not exist / <small class="text-primary text-normal">{{company|slice:"0:19"}}</small></h5>
+          <small class="text-muted float-end">
+            Compulsory fields marked <span class="asterisk">*</span></small>
+        </div>
+        <div class="card-body">
+          <h1><b>Oops! Error 404! </b></h1>
+          <h4 class="text-danger">Sorry, you landed on a page that does not exist. </h4>
+          <h4>The URL of this page seems to be broken or invalid. </h4><br />
+          <h5>Please check again or <a href="{% url 'dashboard' %}" style="color:blue; 
+            text-decoration:underline">Return to Dashboard</a></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

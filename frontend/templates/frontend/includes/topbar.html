@@ -16,7 +16,7 @@
         <input
             type="text"
             class="form-control border-0 shadow-none"
-            placeholder="Search..."
+            placeholder="Search ..."
             aria-label="Search..."
         />
         </div>
@@ -33,17 +33,6 @@
             aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"> 
             
             {{user.userprofile.first_name}} {{user.userprofile.last_name}}
-
-            {% if user.userprofile.is_doc %}
-                Doctor
-            {% elif user.userprofile.is_nrs %}
-                Nurse
-            {% elif user.userprofile.is_lab %}
-                Lab. Scientist
-            {% elif user.userprofile.is_pharm %}
-                Pharmacist
-            {% else %}
-            {% endif %}
             </a>
         </li>
 
@@ -72,7 +61,7 @@
                     <small class="text-muted">
                     {% if user.userprofile.is_doc %}
                         Doctor
-                    {% elif user.userprofile.is_nrs %}
+                    {% elif user.userprofile.is_nurse %}
                         Nurse
                     {% elif user.userprofile.is_lab %}
                         Lab. Scientist
