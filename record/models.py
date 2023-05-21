@@ -10,7 +10,7 @@ class SoapNotes(models.Model):
 	assessment = models.TextField(blank=True)
 	plan = models.TextField(blank=True)
 	comments = models.TextField(blank=True)
-	# recorded_by = models.CharField(max_length=15)
+	created_by = models.CharField(max_length=15)
 	# user = models.OneToOneField(User, related_name='SoapNotes', on_delete=models.CASCADE)
 	created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 

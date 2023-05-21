@@ -1,64 +1,83 @@
-{% extends 'frontend/includes/form_structure.html' %}
+{% extends 'frontend/base.html' %}
+
 {% block title %}Write S-O-A-P Note{% endblock %}
 {% load static %}
 
 {% block content %}
 
 {% if user.userprofile.is_doc or user.userprofile.is_admin %}
-  <!-- PAGE TITLE -->
-  {% block page_title %}Write S-O-A-P Note {% endblock %}
-  <!-- LABELS -->
-  {% block label1 %}Patient{% endblock %} {% block label2 %}Date of Visit{% endblock %}
-  {% block label3 %}Subjective{% endblock %} {% block label4 %}Objective{% endblock %}
-  {% block label5 %}Assessment{% endblock %} {% block label6 %}Plan{% endblock %}
-  {% block label7 %}Other Comments{% endblock %} 
+<div class="content-wrapper">
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+      <div class="col-xl">
+      <div class="card mb-4">
+        <div class="card-body">      
+          <h4 class="card-title">Write S-O-A-P Note / <small class="text-primary">{{company|slice:"0:19"}}</small></h4>
+          <p class="card-description">Fill out this form to register a patient</p>
+          <form method="POST" action="." class="forms-sample">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-12 col-md-6 form-group pb-3">
+                <label for="">Patient</label>
+                <select class="select2 form-select" name="gender" required >
+                  <option value="">- Choose Patient -</option>
+                  {% for pat in patients %}
+                    <option value="{{pat.id}}">{{pat.fname}} {{pat.sname}} ({{pat.gender}}) - {{pat.phone}}</option>
+                  {% endfor %}
+                </select>
+                <small id="emailHelp" class="form-text text-muted"><span class="text-danger">Required. </span> Choose the patient's gender.</small>
+              </div>
 
-  <!-- INPUTS -->
-  <!-- input 1 -->
-  {% block input1 %}patient{% endblock %} {% block input1_required %}required{% endblock %} 
-  {% block input1_form %}select{% endblock %}
-  {% block input1_formb %}select{% endblock %} {% block input1_asterisk %}*{% endblock %}
-  {% block opt_1 %}
-  <option value="">- Choose Patient -</option>
-  {% for pat in patients %}
-    <option value="{{pat.id}}">{{pat.fname}} {{pat.sname}} ({{pat.gender}}) - {{pat.phone}}</option>
-  {% endfor %}
-  {% endblock %}
+              <div class="col-12 col-md-6 form-group pb-3">
+                <label for="exampleInputUsername1">Date of Visit </label>
+                <input type="date" name="date_of_visit" class="form-control" required />
+                <small id="emailHelp" class="form-text text-muted"><span class="text-danger">Required. </span>45 characters or fewer. Add other names.</small>
+              </div>
 
-  <!-- input 2 -->
-  {% block input2 %}date_of_visit{% endblock %} {% block input2_required %}required{% endblock %} 
-  {% block input2_type %}date{% endblock %} {% block input2_form %}input{% endblock %}
-  {% block input2_formb %}input{% endblock %} {% block input2_asterisk %}*{% endblock %}
-  <!-- input 3 -->
-  {% block input3 %}subjective{% endblock %} {% block input3_required %}required{% endblock %} 
-  {% block input3_form %}textarea{% endblock %}
-  {% block input3_formb %}textarea{% endblock %} {% block input3_asterisk %}*{% endblock %}
-  {% block input3_placeholder %}Write the Subjective here ...{% endblock %}
-  <!-- input 4 -->
-  {% block input4 %}objective{% endblock %}
-  {% block input4_form %}textarea{% endblock %}
-  {% block input4_formb %}textarea{% endblock %}
-  {% block input4_placeholder %}Write the Objective here{% endblock %}
-  <!-- input 5 -->
-  {% block input5 %}assessment{% endblock %}
-  {% block input5_form %}textarea{% endblock %}
-  {% block input5_formb %}textarea{% endblock %}
-  {% block input5_placeholder %}Write the Assessment here{% endblock %}
-  <!-- input 6 -->
-  {% block input6 %}plan{% endblock %}
-  {% block input6_form %}textarea{% endblock %}
-  {% block input6_formb %}textarea{% endblock %}
-  {% block input6_placeholder %}Write the Plan here{% endblock %}
-  <!-- input 7 -->
-  {% block input7 %}comments{% endblock %}
-  {% block input7_form %}textarea{% endblock %}
-  {% block input7_formb %}textarea{% endblock %}
-  {% block input7_placeholder %}Write the Comments here{% endblock %}
+              <div class="col-12 form-group pb-3">
+                <label for="exampleInputPassword1">Subjective</label>
+                <textarea name="subjective" class="form-control" id="exampleInputAddress" placeholder="Subjective" required></textarea>
+                <small id="emailHelp" class="form-text text-muted">
+                  <span class="text-danger">Required. </span></small>
+              </div>
 
-  <!-- BUTTONS -->
-  {% block btn_label1 %}Save Record{% endblock %}
-  {% block btn_label2 %}Cancel{% endblock %}
+              <div class="col-12 form-group pb-3">
+                <label for="exampleInputPassword1">Objective</label>
+                <textarea name="objective" class="form-control" id="exampleInputAddress" placeholder="Objective"></textarea>
+                <small id="emailHelp" class="form-text text-muted">Enter the objective ...</small>
+              </div>
 
+              <div class="col-12 form-group pb-3">
+                <label for="exampleInputPassword1">Assessment</label>
+                <textarea name="assessment" class="form-control" id="exampleInputAddress" placeholder="Assessment"></textarea>
+                <small id="emailHelp" class="form-text text-muted">Enter the assessment ...</small>
+              </div>
+
+              <div class="col-12 form-group pb-3">
+                <label for="exampleInputPassword1">Plan</label>
+                <textarea name="plan" class="form-control" id="exampleInputAddress" placeholder="Plan"></textarea>
+                <small id="emailHelp" class="form-text text-muted">Enter the plan ...</small>
+              </div>
+              
+              <div class="col-12 form-group pb-3">
+                <label for="exampleInputPassword1">Other Comments</label>
+                <textarea name="comments" class="form-control" id="exampleInputAddress" placeholder="Other Comments"></textarea>
+                <small id="emailHelp" class="form-text text-muted">Enter the comments ...</small>
+              </div>
+              <input type="text" name="created_by" class="form-control" value="{{user.userprofile.first_name}} {{user.userprofile.last_name}}" style="display: none" />
+              <div class="col-6 form-group pb-3">
+                <button class="btn btn-primary me-2">Save Record</button>
+                <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+              </div>
+              <br />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
 {% else %}
   {% include 'frontend/includes/page_unauthorized.html' %}
 {% endif %}

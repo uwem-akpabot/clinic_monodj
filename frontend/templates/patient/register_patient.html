@@ -9,171 +9,72 @@
     <div class="row">
       <div class="col-xl">
       <div class="card mb-4">
-        <div class="card-header d-flex justify-content-between align-items-center">
-          <h5 class="mb-0">Register Patients / <small class="text-primary text-normal">{{company|slice:"0:19"}}</small></h5>
-          <small class="text-muted float-end">
-            Compulsory fields marked <span class="asterisk">*</span></small>
-        </div>
-        <div class="card-body">
-          <form method="POST" action=".">
+        <div class="card-body">      
+          <h4 class="card-title">Create Patient / <small class="text-primary">{{company|slice:"0:19"}}</small></h4>
+          <p class="card-description">Fill out this form to register a patient</p>
+          <form method="POST" action="." class="forms-sample">
             {% csrf_token %}
             <div class="row">
-              <div class="col-6 mb-3">
-                <label class="form-label" for="basic-icon-default-fullname">First Name <span class="asterisk">*</span></label>
-                <div class="input-group input-group-merge">
-                  <span id="basic-icon-default-fullname2" class="input-group-text">
-                    <i class="bx bx-user"></i></span>
-                  <input class="form-control" type="text" name="fname" placeholder="John" 
-                    maxLength="40" required />
-                </div>
-                <!-- <div class="form-text">You can use letters, numbers & periods</div> -->
+              <div class="col-12 col-md-6 form-group pb-3">
+                <label for="exampleInputUsername1">First Name </label>
+                <input type="text" name="fname" class="form-control" id="exampleInputFirstname" placeholder="First name" maxlength="45" required />
+                <small id="emailHelp" class="form-text text-muted"><span class="text-danger">Required. </span>45 characters or fewer. Add other names.</small>
               </div>
-              <div class="col-6 mb-3">
-                <label class="form-label" for="basic-icon-default-company">Surname <span class="asterisk">*</span></label>
-                  <input class="form-control" type="text" name="sname" placeholder="Doe" 
-                    maxLength="20" required />
+              <div class="col-12 col-md-6 form-group pb-3">
+                <label for="exampleInputPassword1">Surname</label>
+                <input type="text" name="sname" class="form-control" id="exampleInputLastname" placeholder="Surname" maxlength="30" required />
+                <small id="emailHelp" class="form-text text-muted">
+                  <span class="text-danger">Required. </span>Max. 30 characters</small>
               </div>
-              <div class="mb-3 col-md-6">
-                <label for="lastName" class="form-label">Gender <span class="asterisk">*</span></label>
+              <div class="col-12 col-md-6 form-group pb-3">
+                <label for="">Gender</label>
                 <select class="select2 form-select" name="gender" required >
-                    <option value="">- Choose -</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
+                  <option value="">- Choose -</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+              </select>
+              <small id="emailHelp" class="form-text text-muted"><span class="text-danger">Required. </span> Choose the patient's gender.</small>
               </div>
-                
-              <div class="mb-3 col-md-6">
-                <label for="organization" class="form-label">Address</label>
-                <div class="input-group input-group-merge">
-                  <span id="basic-icon-default-company2" class="input-group-text">
-                  <i class="bx bx-buildings"></i></span>
-                  <input type="text" class="form-control" name="address" placeholder="123 Sample Street, Allen Avenue, Ikeja, Lagos" />
-                </div>
+              <div class="col-12 col-md-6 form-group pb-3">
+                <label for="exampleInputPassword1">Address</label>
+                <input type="text" class="form-control" name="address" placeholder="123 Sample Street, Allen Avenue, Ikeja, Lagos" />
+                <small id="emailHelp" class="form-text text-muted">Max. 150 characters. Letters, digits and @/./+/-/_.</small>
               </div>
 
-              <div class="mb-3 col-md-6">
-                <label class="form-label" for="phoneNumber">Phone Number</label>
-                <div class="input-group input-group-merge">
-                  <span id="basic-icon-default-phone2" class="input-group-text">
-                    <i class="bx bx-phone"></i></span>
-                    <input type="text" name="phone" class="form-control" placeholder="803 456 7890" maxLength="12" />
-                </div>
+              <div class="col-12 col-md-6 form-group pb-3">
+                <label>Phone Number</label>
+                <input type="text" name="phone" class="form-control" id="exampleInputPhone" placeholder="Phone Number" maxlength="12" />
+                <small id="" class="form-text text-muted">One phone number. Max. 12 characters.</small>
+              </div>
+              <div class="col-12 col-md-6 form-group pb-3">
+                <label>Email</label>
+                <input type="text" name="email" class="form-control" id="exampleInputEmail" placeholder="Email address" maxlength="45" />
+                <small id="" class="form-text text-muted">Enter a valid email. Max. 45 characters.</small>
               </div>
 
-              <div class="mb-3 col-md-6">
-                <label for="email" class="form-label">E-mail</label>
-                <div class="input-group input-group-merge">
-                  <span class="input-group-text"><i class="bx bx-envelope"></i></span>
-                  <input class="form-control" type="email" name="email" placeholder="john.doe@example.com"
-                    maxLength="40" />
-                </div>
+              <div class="col-12 col-md-6 form-group pb-3">
+                <label>Contact Person</label>
+                <input type="text" name="contact_person" class="form-control" id="exampleInputFirstname" placeholder="Contact person's name" maxlength="60" />
+                <small id="" class="form-text text-muted">Enter name of contact. Max. 60 characters.</small>
               </div>
-
-              <div class="mb-3 col-md-6">
-                <label for="lastName" class="form-label">Contact Person's Name</label>
-                <div class="input-group input-group-merge">
-                  <span id="basic-icon-default-user" class="input-group-text">
-                  <i class="bx bx-user"></i></span>
-                  <input class="form-control" type="text" name="contact_person" placeholder="e.g. Brother's name ..." 
-                    maxLength="40" />
-                </div>
+              <div class="col-12 col-md-6 form-group pb-3">
+                <label>Contact Person' Phone</label>
+                <input type="text" name="contact_person_phone" class="form-control" id="exampleInputPhone" placeholder="08012345678, 09087654321" maxlength="30" />
+                <small id="" class="form-text text-muted">Up to two phone nos. allowed. Max. 30 characters.</small>
               </div>
-
-              <div class="mb-3 col-md-6">
-                <label for="lastName" class="form-label">Contact Person's Phone</label>
-                <div class="input-group input-group-merge">
-                <span id="basic-icon-default-phone2" class="input-group-text">
-                  <i class="bx bx-phone"></i></span>
-                  <input class="form-control" type="text" name="contact_person_phone" placeholder="e.g. Brother's phone no. ..." 
-                  maxLength="30" />
-                </div>
-              </div>
-              <!-- <div class="input-group input-group-merge">
-                <span id="basic-icon-default-message2" class="input-group-text"
-                  ><i class="bx bx-comment"></i
-                ></span>
-                <textarea
-                  id="basic-icon-default-message"
-                  class="form-control"
-                  placeholder="Hi, Do you have a moment to talk Joe?"
-                  aria-label="Hi, Do you have a moment to talk Joe?"
-                  aria-describedby="basic-icon-default-message2"
-                ></textarea>
-              </div> -->
-              <div class="mt-2">
+              <input type="text" name="created_by" class="form-control" value="{{user.userprofile.first_name}} {{user.userprofile.last_name}}" style="display: none" />
+              <div class="col-6 form-group pb-3">
                 <button class="btn btn-primary me-2">Save Record</button>
                 <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+              </div>
+              <br />
             </div>
-          </div>
           </form>
         </div>
       </div>
     </div>
-   </div>
+    </div>
   </div>
 </div>
-        
-<!--<div class="card-body">
-    <form method="POST" action=".">
-        {% csrf_token %}
-    <div class="row">
-        <div class="mb-3 col-md-6">
-        <label for="firstName" class="form-label">First Name <span class="asterisk">*</span></label>
-        <input class="form-control" type="text" name="fname" placeholder="John"  maxLength="40" 
-            required />
-            {errors.fname && <small class="text-danger text-xs font-italic">First Name is required</small>}
-        </div>
-
-        <div class="mb-3 col-md-6">
-        <label for="lastName" class="form-label">Surname <span class="asterisk">*</span></label>
-        <input class="form-control" type="text" name="sname" placeholder="Doe" maxLength="20" required />
-            {errors.sname && <small class="text-danger text-xs font-italic">Surname is required</small>}
-        </div>
-
-        <div class="mb-3 col-md-6">
-        <label for="lastName" class="form-label">Gender <span class="asterisk">*</span></label>
-        <select class="select2 form-select" name="gender" required >
-            <option value="">- Choose -</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-        </select>
-        {errors.gender && <small class="text-danger text-xs font-italic">Gender is required</small>}
-        </div>
-        
-        <div class="mb-3 col-md-6">
-        <label for="organization" class="form-label">Address</label>
-        <input type="text" class="form-control" name="address" placeholder="123 Sample Street, Allen Avenue, Ikeja, Lagos" />
-        </div>
-
-        <div class="mb-3 col-md-6">
-        <label class="form-label" for="phoneNumber">Phone Number</label>
-        <div class="input-group input-group-merge">
-            <span class="input-group-text">NG (+234)</span>
-            <input type="text" name="phone" class="form-control" placeholder="803 456 7890" maxLength="12" />
-        </div>
-        </div>
-
-        <div class="mb-3 col-md-6">
-        <label for="email" class="form-label">E-mail</label>
-        <input class="form-control" type="email" name="email" placeholder="john.doe@example.com" maxLength="40" />
-        </div>
-
-        <div class="mb-3 col-md-6">
-        <label for="lastName" class="form-label">Contact Person's Name</label>
-        <input class="form-control" type="text" name="contact_person" placeholder="e.g. Brother's name ..." maxLength="40" />
-        </div>
-
-        <div class="mb-3 col-md-6">
-        <label for="lastName" class="form-label">Contact Person's Phone</label>
-        <input class="form-control" type="text" name="contact_person_phone" placeholder="e.g. Brother's phone no. ..." maxLength="30" />
-        </div>
-        
-    </div>
-    <div class="mt-2">
-        <button class="btn btn-primary me-2">Save Record</button>
-        <button type="reset" class="btn btn-outline-secondary">Cancel</button>
-    </div>
-    </form>
-</div> -->
-
 {% endblock %}
