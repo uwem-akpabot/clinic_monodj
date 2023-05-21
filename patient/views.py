@@ -10,29 +10,20 @@ company = "Beyond's Healthcare and Fertility Center"
 
 @login_required
 def register_patient(request):
-	patient = Patient.objects.all()
+	patients = Patient.objects.all()
 
 	if request.method == 'POST':
-		# user_id = 
-		form = AddPatientForm(request.POST) #if submit is click and form method is POST
-		#print(request.POST.get(customer_id))
+		form = AddPatientForm(request.POST) 
 		if form.is_valid():
-			patient = form.save() #1. Save filled form record to Contribution table
-			# patient = request.POST.get('patient') #Grab the selected customer id while filling AddContribution form
-			# transaction = request.POST.get('transaction') #Grab the selected descriptn while filling AddContribution form
-
-			msg_title = 'New Record!'
-			msg_text = 'Patient is saved successfully!'
-			messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
+			form_valid(request, form, 'Patient', 'New Record!')
+			# additional codes here
 			return redirect('register_patient')
 		else:
-			msg_title = 'Error!'
-			msg_text = 'Record was NOT saved!'
-			messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
+			form_not_valid()
 	else:
-		form = AddPatientForm() #if submit is not clicked, display empty form
-
-	return render(request, 'patient/register_patient.html', {'form': form, 'company':company, 'patient':patient})
+		form = AddPatientForm() 
+		pass_data = {'form': form, 'company':company, 'patients':patients}
+	return render(request, 'patient/register_patient.html', pass_data)
 
 
 @login_required
@@ -40,6 +31,18 @@ def patients(request):
 	patients = Patient.objects.all()
 	return render(request,'patient/patients.html', {'company':company, 'patients': patients})
 
+# Misc function
+def form_valid(request, form, subject, msg):
+	form.save() 
+	msg_title = msg
+	msg_text = f'{subject} is saved successfully!'
+	messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
+
+# Misc function
+def form_not_valid(request):
+	msg_title = 'Error!'
+	msg_text = 'Record was NOT saved!'
+	messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
 
 """
 

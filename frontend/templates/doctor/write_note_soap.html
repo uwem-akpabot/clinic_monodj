@@ -1,95 +1,64 @@
-{% extends 'frontend/base.html' %}
-
+{% extends 'frontend/includes/form_structure.html' %}
 {% block title %}Write S-O-A-P Note{% endblock %}
 {% load static %}
 
 {% block content %}
 
 {% if user.userprofile.is_doc or user.userprofile.is_admin %}
-<div class="content-wrapper">
-  <div class="container-xxl flex-grow-1 container-p-y">
-    <div class="row">
-      <div class="col-xl">
-      <div class="card mb-4">
-        <div class="card-header d-flex justify-content-between align-items-center">
-          <h5 class="mb-0">Write S-O-A-P Note / <small class="text-primary text-normal">{{company|slice:"0:19"}}</small></h5>
-          <small class="text-muted float-end">
-            Compulsory fields marked <span class="asterisk">*</span></small>
-        </div>
-        <div class="card-body">
-          <form method="POST" action=".">
-            {% csrf_token %}
-            <div class="row">
-              <div class="mb-3 col-12 col-md-6">
-                <label for="lastName" class="form-label">Patient <span class="asterisk">*</span></label>
-                <select class="form-control" name="patient" required>
-                  <option value="">- Choose Patient -</option>
-                  {% for pat in patients %}
-                    <option value="{{pat.id}}">{{pat.fname}} {{pat.sname}} ({{pat.gender}}) - {{pat.phone}}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div class="col-6 mb-3">
-                <label class="form-label" for="basic-icon-default-company">Date of Visit <span class="asterisk">*</span></label>
-                  <input class="form-control" type="date" name="date_of_visit" required />
-              </div>
-              <div class="mb-3 col-12">
-                <label for="organization" class="form-label">Subjective <span class="asterisk">*</span></label>
-                <div class="input-group input-group-merge">
-                  <span id="basic-icon-default-company2" class="input-group-text">
-                  <i class="bx bx-note"></i></span>
-                  <textarea class="form-control" name="subjective" placeholder="Write the Subjective here ..." required></textarea>
-                </div>
-              </div>
-                
-              <div class="mb-3 col-12">
-                <label for="organization" class="form-label">Objective</label>
-                <div class="input-group input-group-merge">
-                  <span id="basic-icon-default-company2" class="input-group-text">
-                  <i class="bx bx-comment"></i></span>
-                  <textarea class="form-control" name="objective" placeholder="Write the Objective here ..."></textarea>
-                </div>
-              </div>
+  <!-- PAGE TITLE -->
+  {% block page_title %}Write S-O-A-P Note {% endblock %}
+  <!-- LABELS -->
+  {% block label1 %}Patient{% endblock %} {% block label2 %}Date of Visit{% endblock %}
+  {% block label3 %}Subjective{% endblock %} {% block label4 %}Objective{% endblock %}
+  {% block label5 %}Assessment{% endblock %} {% block label6 %}Plan{% endblock %}
+  {% block label7 %}Other Comments{% endblock %} 
 
-              <div class="mb-3 col-12">
-                <label class="form-label" for="phoneNumber">Assessment</label>
-                <div class="input-group input-group-merge">
-                  <span id="basic-icon-default-phone2" class="input-group-text">
-                    <i class="bx bx-edit"></i></span>
-                    <textarea name="assessment" class="form-control" placeholder="Write the Assessment here ..." maxLength="12"></textarea>
-                </div>
-              </div>
+  <!-- INPUTS -->
+  <!-- input 1 -->
+  {% block input1 %}patient{% endblock %} {% block input1_required %}required{% endblock %} 
+  {% block input1_form %}select{% endblock %}
+  {% block input1_formb %}select{% endblock %} {% block input1_asterisk %}*{% endblock %}
+  {% block opt_1 %}
+  <option value="">- Choose Patient -</option>
+  {% for pat in patients %}
+    <option value="{{pat.id}}">{{pat.fname}} {{pat.sname}} ({{pat.gender}}) - {{pat.phone}}</option>
+  {% endfor %}
+  {% endblock %}
 
-              <div class="mb-3 col-12">
-                <label for="email" class="form-label">Plan</label>
-                <div class="input-group input-group-merge">
-                  <span class="input-group-text"><i class="bx bx-envelope"></i></span>
-                  <textarea class="form-control" name="plan" placeholder="Write the Plan here ..."></textarea>
-                </div>
-              </div>
+  <!-- input 2 -->
+  {% block input2 %}date_of_visit{% endblock %} {% block input2_required %}required{% endblock %} 
+  {% block input2_type %}date{% endblock %} {% block input2_form %}input{% endblock %}
+  {% block input2_formb %}input{% endblock %} {% block input2_asterisk %}*{% endblock %}
+  <!-- input 3 -->
+  {% block input3 %}subjective{% endblock %} {% block input3_required %}required{% endblock %} 
+  {% block input3_form %}textarea{% endblock %}
+  {% block input3_formb %}textarea{% endblock %} {% block input3_asterisk %}*{% endblock %}
+  {% block input3_placeholder %}Write the Subjective here ...{% endblock %}
+  <!-- input 4 -->
+  {% block input4 %}objective{% endblock %}
+  {% block input4_form %}textarea{% endblock %}
+  {% block input4_formb %}textarea{% endblock %}
+  {% block input4_placeholder %}Write the Objective here{% endblock %}
+  <!-- input 5 -->
+  {% block input5 %}assessment{% endblock %}
+  {% block input5_form %}textarea{% endblock %}
+  {% block input5_formb %}textarea{% endblock %}
+  {% block input5_placeholder %}Write the Assessment here{% endblock %}
+  <!-- input 6 -->
+  {% block input6 %}plan{% endblock %}
+  {% block input6_form %}textarea{% endblock %}
+  {% block input6_formb %}textarea{% endblock %}
+  {% block input6_placeholder %}Write the Plan here{% endblock %}
+  <!-- input 7 -->
+  {% block input7 %}comments{% endblock %}
+  {% block input7_form %}textarea{% endblock %}
+  {% block input7_formb %}textarea{% endblock %}
+  {% block input7_placeholder %}Write the Comments here{% endblock %}
 
-              <div class="mb-3 col-12">
-                <label for="lastName" class="form-label">Other Comments</label>
-                <div class="input-group input-group-merge">
-                  <span id="basic-icon-default-user" class="input-group-text">
-                  <i class="bx bx-user"></i></span>
-                  <textarea class="form-control" type="text" name="comments" placeholder="Write any ther comments here ..."></textarea>
-                </div>
-              </div>
-              <!-- <input type="text" name="recorded_by" class="form-control" value="{{user.userprofile.first_name}} {{user.userprofile.last_name}}" /> -->
-              
-              <div class="mt-2">
-                <button class="btn btn-primary me-2">Save Record</button>
-                <button type="reset" class="btn btn-outline-secondary">Cancel</button>
-            </div>
-          </div>
-          </form>
-        </div>
-      </div>
-    </div>
-   </div>
-  </div>
-</div>
+  <!-- BUTTONS -->
+  {% block btn_label1 %}Save Record{% endblock %}
+  {% block btn_label2 %}Cancel{% endblock %}
+
 {% else %}
   {% include 'frontend/includes/page_unauthorized.html' %}
 {% endif %}

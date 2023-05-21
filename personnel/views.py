@@ -14,38 +14,22 @@ def write_note_soap(request):
 
 	if request.method == 'POST':
 		form = WriteNoteForm(request.POST) 
-
 		if form.is_valid():
-			write_note = form.save() 
-			msg_title = 'New Record!'
-			msg_text = 'Note is saved successfully!'
-			messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
+			form_valid(request, form, 'Note', 'New Record!')
+			# additional codes here
 			return redirect('write_note_soap')
 		else:
-			msg_title = 'Error!'
-			msg_text = 'Record was NOT saved!'
-			messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
+			form_not_valid()
 	else:
 		form = WriteNoteForm() 
-	return render(request, 'doctor/write_note_soap.html', {'form': form, 'company':company, 'patients':patients})
-
+		pass_data = {'form': form, 'company':company, 'patients':patients}
+	return render(request, 'doctor/write_note_soap.html', pass_data)
+	
+	
 @login_required
 def view_notes_soap(request):
 	soapnotes = SoapNotes.objects.all()
 	return render(request,'doctor/view_notes_soap.html', {'company':company, 'soapnotes': soapnotes})
-
-def form_processing(request, form_name, subject, redirect_to):
-	form = form_name(request.POST) 
-	if form.is_valid():
-		form.save() 
-		msg_title = 'New Record!'
-		msg_text = f'{subject} is saved successfully!'
-		messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
-		return redirect(redirect_to)
-	else:
-		msg_title = 'Error!'
-		msg_text = 'Record was NOT saved!'
-		messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
 		
 #Nurse
 @login_required
@@ -53,29 +37,35 @@ def record_triage(request):
 	patients = Patient.objects.all()
 
 	if request.method == 'POST':
-		form_processing('RecordTriageForm', 'Triage', 'nurse/record_triage')
-		# form = RecordTriageForm(request.POST) 
-		# if form.is_valid():
-		# 	print("Form is valid")
-		# 	form.save() 
-		# 	msg_title = 'New Record!'
-		# 	msg_text = 'Triage is saved successfully!'
-		# 	messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
-		# 	return redirect('record_triage')
-		# else:
-		# 	msg_title = 'Error!'
-		# 	msg_text = 'Record was NOT saved!'
-		# 	messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
+		form = RecordTriageForm(request.POST) 
+		if form.is_valid():
+			form_valid(request, form, 'Triage', 'New Record!')
+			# additional codes here
+			return redirect('record_triage')
+		else:
+			form_not_valid()
 	else:
 		form = RecordTriageForm() 
-
-	return render(request, 'nurse/record_triage.html', {'form': form, 'company':company, 'patients':patients})
+		pass_data = {'form': form, 'company':company, 'patients':patients}
+	return render(request, 'nurse/record_triage.html', pass_data)
 
 @login_required
 def view_triage(request):
 	triages = Triage.objects.all()
 	return render(request,'nurse/view_triage.html', {'company':company, 'triages': triages})
 
+# Misc function
+def form_valid(request, form, subject, msg):
+	form.save() 
+	msg_title = msg
+	msg_text = f'{subject} is saved successfully!'
+	messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
+
+# Misc function
+def form_not_valid(request):
+	msg_title = 'Error!'
+	msg_text = 'Record was NOT saved!'
+	messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
 
 #Lab
 @login_required
