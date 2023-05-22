@@ -16,23 +16,8 @@
           <p class="card-description">Fill out this form to register a patient</p>
           <form method="POST" action="." class="forms-sample">
             {% csrf_token %}
-            <div class="row">
-              <div class="col-12 col-md-6 form-group pb-3">
-                <label for="">Patient</label>
-                <select class="select2 form-select" name="gender" required >
-                  <option value="">- Choose Patient -</option>
-                  {% for pat in patients %}
-                    <option value="{{pat.id}}">{{pat.fname}} {{pat.sname}} ({{pat.gender}}) - {{pat.phone}}</option>
-                  {% endfor %}
-                </select>
-                <small id="emailHelp" class="form-text text-muted"><span class="text-danger">Required. </span> Choose the patient's gender.</small>
-              </div>
-
-              <div class="col-12 col-md-6 form-group pb-3">
-                <label for="exampleInputUsername1">Date of Visit </label>
-                <input type="date" name="date_of_visit" class="form-control" required />
-                <small id="emailHelp" class="form-text text-muted"><span class="text-danger">Required. </span>45 characters or fewer. Add other names.</small>
-              </div>
+            <div class="row">           
+              {% include 'frontend/includes/select_patient_and_date.html' %}
 
               <div class="col-12 form-group pb-3">
                 <label for="exampleInputPassword1">Subjective</label>

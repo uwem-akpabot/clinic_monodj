@@ -19,7 +19,7 @@ def register_patient(request):
 			# additional codes here
 			return redirect('register_patient')
 		else:
-			form_not_valid()
+			form_not_valid(request)
 	else:
 		form = AddPatientForm() 
 		pass_data = {'form': form, 'company':company, 'patients':patients}

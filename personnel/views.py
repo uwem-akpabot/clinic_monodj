@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from patient.models import Patient
-from record.models import SoapNotes, Triage
-from record.forms import WriteNoteForm, RecordTriageForm
+from record.models import SoapNotes, Triage, DispenseDrugs, RecordLabResult
+from record.forms import WriteNoteForm, RecordTriageForm, DispenseDrugsForm, RecordLabResultForm
 from django.contrib import messages
 
 company = "Beyond's Healthcare and Fertility Center"
@@ -19,7 +19,7 @@ def write_note_soap(request):
 			# additional codes here
 			return redirect('write_note_soap')
 		else:
-			form_not_valid()
+			form_not_valid(request)
 	else:
 		form = WriteNoteForm() 
 		pass_data = {'form': form, 'company':company, 'patients':patients}
@@ -54,6 +54,50 @@ def view_triage(request):
 	triages = Triage.objects.all()
 	return render(request,'nurse/view_triage.html', {'company':company, 'triages': triages})
 
+@login_required
+def dispense_drugs(request):
+	patients = Patient.objects.all()
+
+	if request.method == 'POST':
+		form = DispenseDrugsForm(request.POST) 
+		if form.is_valid():
+			form_valid(request, form, 'Dispense Drugs', 'New Record!')
+			# additional codes here
+			return redirect('dispense_drugs')
+		else:
+			form_not_valid()
+	else:
+		form = DispenseDrugsForm() 
+		pass_data = {'form': form, 'company':company, 'patients':patients}
+	return render(request, 'pharmacist/dispense_drugs.html', pass_data)
+
+@login_required
+def view_dispensed(request):
+	view_dispensed = DispenseDrugs.objects.all()
+	return render(request,'pharmacist/view_dispensed.html', {'company':company, 'view_dispensed': view_dispensed})
+
+@login_required
+def record_labresult(request):
+	patients = Patient.objects.all()
+
+	if request.method == 'POST':
+		form = RecordLabResultForm(request.POST) 
+		if form.is_valid():
+			form_valid(request, form, 'Record LabResult', 'New Record!')
+			# additional codes here
+			return redirect('record_labresult')
+		else:
+			form_not_valid()
+	else:
+		form = RecordLabResultForm() 
+		pass_data = {'form': form, 'company':company, 'patients':patients}
+	return render(request, 'lab/record_labresult.html', pass_data)
+
+@login_required
+def view_labresult(request):
+	view_labresults = RecordLabResult.objects.all()
+	return render(request,'lab/view_labresult.html', {'company':company, 'view_labresults': view_labresults})
+
 # Misc function
 def form_valid(request, form, subject, msg):
 	form.save() 
@@ -66,232 +110,6 @@ def form_not_valid(request):
 	msg_title = 'Error!'
 	msg_text = 'Record was NOT saved!'
 	messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
-
-#Lab
-@login_required
-def record_labresult(request):
-	pass
-	# patients = Patient.objects.all()
-
-	# if request.method == 'POST':
-	# 	form = LabResultForm(request.POST) 
-	# 	if form.is_valid():
-	# 		print("Form is valid")
-	# 		form.save() 
-	# 		msg_title = 'New Record!'
-	# 		msg_text = 'Lab Result is saved successfully!'
-	# 		messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
-	# 		return redirect('record_triage')
-	# 	else:
-	# 		msg_title = 'Error!'
-	# 		msg_text = 'Record was NOT saved!'
-	# 		messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
-	# else:
-	# 	form = LabResultForm() 
-
-	# return render(request, 'nurse/record_triage.html', {'form': form, 'company':company, 'patients':patients})
-
-@login_required
-def view_labresult(request):
-	pass
-	# labres = LabResult.objects.all()
-	# return render(request,'lab/view_labresult.html', {'company':company, 'labres': labres})
-
-#Lab
-@login_required
-def dispense_drugs(request):
-	pass
-	# patients = Patient.objects.all()
-
-	# if request.method == 'POST':
-	# 	form = LabResultForm(request.POST) 
-	# 	if form.is_valid():
-	# 		print("Form is valid")
-	# 		form.save() 
-	# 		msg_title = 'New Record!'
-	# 		msg_text = 'Lab Result is saved successfully!'
-	# 		messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
-	# 		return redirect('record_triage')
-	# 	else:
-	# 		msg_title = 'Error!'
-	# 		msg_text = 'Record was NOT saved!'
-	# 		messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
-	# else:
-	# 	form = LabResultForm() 
-
-	# return render(request, 'nurse/record_triage.html', {'form': form, 'company':company, 'patients':patients})
-
-@login_required
-def view_dispensed(request):
-	pass
-	# labres = LabResult.objects.all()
-	# return render(request,'lab/view_labresult.html', {'company':company, 'labres': labres})
-
-"""
-@login_required
-def request_labtest_lab(request):
-	patient = Patient.objects.all()
-
-	if request.method == 'POST':
-		form = RequestLabtestForm(request.POST) 
-
-		if form.is_valid():
-			patient = form.save() 
-			msg_title = 'New Record!'
-			msg_text = 'Patient is saved successfully!'
-			messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
-			return redirect('register_patient')
-		else:
-			msg_title = 'Error!'
-			msg_text = 'Record was NOT saved!'
-			messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
-	else:
-		form = RequestLabtestForm() 
-
-	return render(request, 'patient/register_patient.html', {'form': form, 'company':company, 'patient':patient})
-
-
-@login_required
-def view_testresult_lab(request):
-	patients = Patient.objects.all()
-	return render(request,'patient/patients.html', {'company':company, 'patients': patients})
-
-@login_required
-def request_triage_nurse(request):
-	patient = Patient.objects.all()
-
-	if request.method == 'POST':
-		form = RequestLabtestForm(request.POST) 
-
-		if form.is_valid():
-			patient = form.save() 
-			msg_title = 'New Record!'
-			msg_text = 'Patient is saved successfully!'
-			messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
-			return redirect('register_patient')
-		else:
-			msg_title = 'Error!'
-			msg_text = 'Record was NOT saved!'
-			messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
-	else:
-		form = RequestLabtestForm() 
-
-	return render(request, 'patient/register_patient.html', {'form': form, 'company':company, 'patient':patient})
-
-
-@login_required
-def view_triage_nurse(request):
-	patients = Patient.objects.all()
-	return render(request,'patient/patients.html', {'company':company, 'patients': patients})
-
-
-@login_required
-def request_drug_pharm(request):
-	patient = Patient.objects.all()
-
-	if request.method == 'POST':
-		form = RequestLabtestForm(request.POST) 
-
-		if form.is_valid():
-			patient = form.save() 
-			msg_title = 'New Record!'
-			msg_text = 'Patient is saved successfully!'
-			messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
-			return redirect('register_patient')
-		else:
-			msg_title = 'Error!'
-			msg_text = 'Record was NOT saved!'
-			messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
-	else:
-		form = RequestLabtestForm() 
-
-	return render(request, 'patient/register_patient.html', {'form': form, 'company':company, 'patient':patient})
-
-# LAB
-@login_required
-def record_labresult(request):
-	patient = Patient.objects.all()
-
-	if request.method == 'POST':
-		form = RequestLabtestForm(request.POST) 
-
-		if form.is_valid():
-			patient = form.save() 
-			msg_title = 'New Record!'
-			msg_text = 'Patient is saved successfully!'
-			messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
-			return redirect('register_patient')
-		else:
-			msg_title = 'Error!'
-			msg_text = 'Record was NOT saved!'
-			messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
-	else:
-		form = RequestLabtestForm() 
-
-	return render(request, 'patient/register_patient.html', {'form': form, 'company':company, 'patient':patient})
-
-# NURSE
-@login_required
-def record_triage(request):
-	patient = Patient.objects.all()
-
-	if request.method == 'POST':
-		form = RequestLabtestForm(request.POST) 
-
-		if form.is_valid():
-			patient = form.save() 
-			msg_title = 'New Record!'
-			msg_text = 'Patient is saved successfully!'
-			messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
-			return redirect('register_patient')
-		else:
-			msg_title = 'Error!'
-			msg_text = 'Record was NOT saved!'
-			messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
-	else:
-		form = RequestLabtestForm() 
-
-	return render(request, 'patient/register_patient.html', {'form': form, 'company':company, 'patient':patient})
-
-# PHARM
-@login_required
-def dispense_drugs(request):
-	patient = Patient.objects.all()
-
-	if request.method == 'POST':
-		form = RequestLabtestForm(request.POST) 
-
-		if form.is_valid():
-			patient = form.save() 
-			msg_title = 'New Record!'
-			msg_text = 'Patient is saved successfully!'
-			messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
-			return redirect('register_patient')
-		else:
-			msg_title = 'Error!'
-			msg_text = 'Record was NOT saved!'
-			messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
-	else:
-		form = RequestLabtestForm() 
-
-	return render(request, 'patient/register_patient.html', {'form': form, 'company':company, 'patient':patient})
-"""
-
-"""
-write_note_soap
-# view_notes_soap
-request_labtest_lab
-view_testresult_lab
-request_triage_nurse
-view_triage_nurse
-request_drug_pharm 
-#lab
-record_labresult
-#nurse
-record_triage
-#pharm
-dispense_drugs
-"""
 
 # @login_required
 # def manager(request):
