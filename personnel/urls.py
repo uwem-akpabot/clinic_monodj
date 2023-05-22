@@ -5,7 +5,7 @@ urlpatterns = [
 	#doctor
 	path('write_note_soap/', views.write_note_soap, name='write_note_soap'),
     path('view_notes_soap/', views.view_notes_soap, name= 'view_notes_soap'),
-	# path('request_labtest_lab/', views.request_labtest_lab, name='request_labtest_lab'),
+	path('request_labtest_lab/', views.request_labtest_lab, name='request_labtest_lab'),
     # path('view_testresult_lab/', views.view_testresult_lab, name= 'view_testresult_lab'),
 	# path('request_triage_nurse/', views.request_triage_nurse, name='request_triage_nurse'),
     # path('view_triage_nurse/', views.view_triage_nurse, name= 'view_triage_nurse'),

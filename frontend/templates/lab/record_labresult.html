@@ -1,0 +1,162 @@
+{% extends 'frontend/base.html' %}
+
+{% block title %}Record Lab Result{% endblock %}
+{% load static %}
+
+{% block content %}
+
+<!-- Lab and Admins -->
+{% if user.userprofile.is_lab or user.userprofile.is_admin %}
+<div class="content-wrapper">
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+      <div class="col-xl">
+      <div class="card mb-4">
+        <div class="card-body">      
+          <h4 class="card-title">Record Lab Result / <small class="text-primary">{{company|slice:"0:19"}}</small></h4>
+          <p class="card-description">Fill out this form to record medicine dispensing</p>
+          <form method="POST" action="." class="forms-sample">
+            {% csrf_token %}
+            <div class="row">
+              {% include 'frontend/includes/select_patient_and_date.html' %}
+              
+              <!-- <div class="col-12 col-md-12 form-group pb-3">
+                <label for="exampleInputUsername1">Diagnosis </label>
+                <textarea name="diagnosis" class="form-control" placeholder="Diagnosis" required></textarea>
+                <small id="emailHelp" class="form-text text-muted"><span class="text-danger">Required. </span></small>
+              </div>
+              
+              <div class="col-8 col-md-4 form-group pb-3">
+                <label for="exampleInputUsername1">Medicine 1 </label>
+                <input type="text" name="medicine_1" class="form-control" placeholder="Medicine e.g. Paracetamol" maxlength="40" required />
+                <small id="emailHelp" class="form-text text-muted"><span class="text-danger">Required. </span> Max. 40 characters</small>
+              </div>
+              <div class="col-4 col-md-2 form-group pb-3">
+                <label for="exampleInputUsername1">Med. 1 Dose</label>
+                <select name="med1_dose" class="form-control" required>
+                  <option value="">- Choose -</option>
+                  <option value="1x_daily">1x daily</option>
+                  <option value="2x_daily">2x daily</option>
+                  <option value="3x_daily">3x daily</option>
+                  <option value="morning_only">Morning only</option>
+                  <option value="night_only">Night only</option>
+                  <option value="before_meal">Before Meal</option>
+                  <option value="not_specified">Not specified</option>
+                </select>
+                <small id="emailHelp" class="form-text text-muted"><span class="text-danger">Required. </span></small>
+              </div>
+
+              <div class="col-8 col-md-4 form-group pb-3">
+                <label for="exampleInputUsername1">Medicine 2 </label>
+                <input type="text" name="medicine_2" class="form-control" maxlength="40" />
+                <small id="emailHelp" class="form-text text-muted">Max. 40 characters</small>
+              </div>
+              <div class="col-4 col-md-2 form-group pb-3">
+                <label for="exampleInputUsername1">Med. 2 Dose</label>
+                <select name="med2_dose" class="form-control">
+                  <option value="">- Choose -</option>
+                  <option value="1x_daily">1x daily</option>
+                  <option value="2x_daily">2x daily</option>
+                  <option value="3x_daily">3x daily</option>
+                  <option value="morning_only">Morning only</option>
+                  <option value="night_only">Night only</option>
+                  <option value="before_meal">Before Meal</option>
+                  <option value="not_specified">Not specified</option>
+                </select>
+              </div>
+
+              <div class="col-8 col-md-4 form-group pb-3">
+                <label for="exampleInputUsername1">Medicine 3 </label>
+                <input type="text" name="medicine_3" class="form-control" maxlength="40" />
+                <small id="emailHelp" class="form-text text-muted">Max. 40 characters</small>
+              </div>
+              <div class="col-4 col-md-2 form-group pb-3">
+                <label for="exampleInputUsername1">Med. 3 Dose</label>
+                <select name="med3_dose" class="form-control">
+                  <option value="">- Choose -</option>
+                  <option value="1x_daily">1x daily</option>
+                  <option value="2x_daily">2x daily</option>
+                  <option value="3x_daily">3x daily</option>
+                  <option value="morning_only">Morning only</option>
+                  <option value="night_only">Night only</option>
+                  <option value="before_meal">Before Meal</option>
+                  <option value="not_specified">Not specified</option>
+                </select>
+              </div>
+
+              <div class="col-8 col-md-4 form-group pb-3">
+                <label for="exampleInputUsername1">Medicine 4 </label>
+                <input type="text" name="medicine_4" class="form-control" maxlength="40" />
+                <small id="emailHelp" class="form-text text-muted">Max. 40 characters</small>
+              </div>
+              <div class="col-4 col-md-2 form-group pb-3">
+                <label for="exampleInputUsername1">Med. 4 Dose</label>
+                <select name="med4_dose" class="form-control">
+                  <option value="">- Choose -</option>
+                  <option value="1x_daily">1x daily</option>
+                  <option value="2x_daily">2x daily</option>
+                  <option value="3x_daily">3x daily</option>
+                  <option value="morning_only">Morning only</option>
+                  <option value="night_only">Night only</option>
+                  <option value="before_meal">Before Meal</option>
+                  <option value="not_specified">Not specified</option>
+                </select>
+              </div>
+
+              <div class="col-8 col-md-4 form-group pb-3">
+                <label for="exampleInputUsername1">Medicine 5 </label>
+                <input type="text" name="medicine_5" class="form-control" maxlength="40" />
+                <small id="emailHelp" class="form-text text-muted">Max. 40 characters</small>
+              </div>
+              <div class="col-4 col-md-2 form-group pb-3">
+                <label for="exampleInputUsername1">Med. 5 Dose</label>
+                <select name="med5_dose" class="form-control">
+                  <option value="">- Choose -</option>
+                  <option value="1x_daily">1x daily</option>
+                  <option value="2x_daily">2x daily</option>
+                  <option value="3x_daily">3x daily</option>
+                  <option value="morning_only">Morning only</option>
+                  <option value="night_only">Night only</option>
+                  <option value="before_meal">Before Meal</option>
+                  <option value="not_specified">Not specified</option>
+                </select>
+              </div>
+
+              <div class="col-8 col-md-4 form-group pb-3">
+                <label for="exampleInputUsername1">Medicine 6 </label>
+                <input type="text" name="medicine_6" class="form-control" maxlength="40" />
+                <small id="emailHelp" class="form-text text-muted">Max. 40 characters</small>
+              </div>
+              <div class="col-4 col-md-2 form-group pb-3">
+                <label for="exampleInputUsername1">Med. 6 Dose</label>
+                <select name="med6_dose" class="form-control">
+                  <option value="">- Choose -</option>
+                  <option value="1x_daily">1x daily</option>
+                  <option value="2x_daily">2x daily</option>
+                  <option value="3x_daily">3x daily</option>
+                  <option value="morning_only">Morning only</option>
+                  <option value="night_only">Night only</option>
+                  <option value="before_meal">Before Meal</option>
+                  <option value="not_specified">Not specified</option>
+                </select>
+              </div> -->
+              
+              <input type="text" name="created_by" class="form-control" value="{{user.userprofile.first_name}} {{user.userprofile.last_name}}" style="display: none" />
+              <div class="col-6 form-group pb-3">
+                <button class="btn btn-primary me-2">Save Record</button>
+                <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+              </div>
+              <br />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+{% else %}
+  {% include 'frontend/includes/page_unauthorized.html' %}
+{% endif %}
+
+{% endblock %}

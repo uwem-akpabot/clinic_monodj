@@ -1,5 +1,5 @@
 from django import forms
-from .models import SoapNotes, Triage, DispenseDrugs, RecordLabResult
+from .models import SoapNotes, Triage, DispenseDrugs, RecordLabResult, RequestLabtest_Lab
 
 # Doctor
 class WriteNoteForm(forms.ModelForm):
@@ -25,4 +25,10 @@ class DispenseDrugsForm(forms.ModelForm):
 class RecordLabResultForm(forms.ModelForm):
 	class Meta:
 		model = RecordLabResult
+		fields = ['patient', 'date_of_visit']
+
+# Doctor
+class RequestLabtestLabForm(forms.ModelForm):
+	class Meta:
+		model = RequestLabtest_Lab
 		fields = ['patient', 'date_of_visit']

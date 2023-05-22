@@ -66,8 +66,7 @@
 			</a>
 		  </li>
 		  <li class="menu-item">
-			<!-- <a href="request_labtest_lab" class="menu-link"> -->
-			<a href="" class="menu-link">
+			<a href="{% url 'request_labtest_lab' %}" class="menu-link">
 			  <div data-i18n="Connections">Request Labtest (Lab)</div>
 			</a>
 		  </li>
@@ -85,15 +84,13 @@
 			</a>
 		  </li>
 		  <li class="menu-item">
-			<!-- <a href="view_triage_nurse" class="menu-link"> -->
-			<a href="" class="menu-link">
+			<a href="{% url 'view_triage' %}" class="menu-link">
 			  <div data-i18n="Connections">View Triage (Nurse)</div>
 			</a>
 		  </li>
 
 		  <li class="menu-item">
-			<!-- <a href="request_drug_pharm" class="menu-link"> -->
-			<a href="" class="menu-link">
+			<a href="{% url 'dispense_drugs' %}" class="menu-link">
 			  <div data-i18n="Connections">Request Drug (Pharm)</div>
 			</a>
 		  </li>
@@ -109,12 +106,12 @@
 		</a>
 		<ul class="menu-sub">
 		  <li class="menu-item">
-			<a href="{% url 'record_labresult' %}" class="menu-link" target="_blank">
+			<a href="{% url 'record_labresult' %}" class="menu-link">
 			  <div data-i18n="Basic">Record Lab.Result</div>
 			</a>
 		  </li>
 		  <li class="menu-item">
-			<a href="{% url 'view_labresult' %}" class="menu-link" target="_blank">
+			<a href="{% url 'view_labresult' %}" class="menu-link">
 			  <div data-i18n="Basic">View Lab.Result</div>
 			</a>
 		  </li>

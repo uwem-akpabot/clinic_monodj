@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from patient.models import Patient
-from record.models import SoapNotes, Triage, DispenseDrugs, RecordLabResult
-from record.forms import WriteNoteForm, RecordTriageForm, DispenseDrugsForm, RecordLabResultForm
+from record.models import SoapNotes, Triage, DispenseDrugs, RecordLabResult, RequestLabtest_Lab
+from record.forms import WriteNoteForm, RecordTriageForm, DispenseDrugsForm, RecordLabResultForm, RequestLabtestLabForm
 from django.contrib import messages
 
 company = "Beyond's Healthcare and Fertility Center"
@@ -54,6 +54,7 @@ def view_triage(request):
 	triages = Triage.objects.all()
 	return render(request,'nurse/view_triage.html', {'company':company, 'triages': triages})
 
+# Pharcmacist
 @login_required
 def dispense_drugs(request):
 	patients = Patient.objects.all()
@@ -76,6 +77,7 @@ def view_dispensed(request):
 	view_dispensed = DispenseDrugs.objects.all()
 	return render(request,'pharmacist/view_dispensed.html', {'company':company, 'view_dispensed': view_dispensed})
 
+# Lab Scientist
 @login_required
 def record_labresult(request):
 	patients = Patient.objects.all()
@@ -93,10 +95,36 @@ def record_labresult(request):
 		pass_data = {'form': form, 'company':company, 'patients':patients}
 	return render(request, 'lab/record_labresult.html', pass_data)
 
+# Lab Scientist and Doctor
 @login_required
 def view_labresult(request):
 	view_labresults = RecordLabResult.objects.all()
 	return render(request,'lab/view_labresult.html', {'company':company, 'view_labresults': view_labresults})
+
+# Doctor
+@login_required
+def request_labtest_lab(request):
+	patients = Patient.objects.all()
+
+	if request.method == 'POST':
+		form = RequestLabtestLabForm(request.POST) 
+		if form.is_valid():
+			form_valid(request, form, 'Request Lab test', 'New Record!')
+			# additional codes here
+			return redirect('record_labresult')
+		else:
+			form_not_valid()
+	else:
+		form = RequestLabtestLabForm() 
+		pass_data = {'form': form, 'company':company, 'patients':patients}
+	return render(request, 'doctor/request_labtest_lab.html', pass_data)
+
+# Doctor
+@login_required
+def view_requestlabtest_lab(request):
+	view_requestlabtest_lab = RequestLabtest_Lab.objects.all()
+	return render(request,'doc/view_requestlabtest_lab.html', {'company':company, 'view_requestlabtest_lab': view_requestlabtest_lab})
+
 
 # Misc function
 def form_valid(request, form, subject, msg):
