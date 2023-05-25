@@ -31,4 +31,4 @@ class RecordLabResultForm(forms.ModelForm):
 class RequestLabtestLabForm(forms.ModelForm):
 	class Meta:
 		model = RequestLabtest_Lab
-		fields = ['patient', 'date_of_visit']
+		fields = ['patient', 'date_of_visit', 'biochemistry', 'haematology', 'microbiology']

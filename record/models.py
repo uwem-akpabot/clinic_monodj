@@ -63,6 +63,9 @@ class RecordLabResult(models.Model):
 class RequestLabtest_Lab(models.Model):
 	patient = models.ForeignKey(Patient, related_name='request_labtest_lab', on_delete=models.CASCADE)
 	date_of_visit = models.CharField(max_length=15)
+	biochemistry = models.TextField(null=True, blank=True)
+	haematology = models.TextField(null=True, blank=True)
+	microbiology = models.TextField(null=True, blank=True)
 	created_by = models.CharField(max_length=15)
 	# user = models.OneToOneField(User, related_name='SoapNotes', on_delete=models.CASCADE)
 	created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)

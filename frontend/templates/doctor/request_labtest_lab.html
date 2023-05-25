@@ -25,302 +25,125 @@
                     <br /><h6 className="seofct-icon pb-0 mb-0"><i className="fa fa-flask"></i> <b>Biochemistry</b></h6>
                 </div>
                 <div class="row custom-checkboxes px-2 text-dark">
-                    <div class="col-4 col-md-3 form-group pb-3">
-                        <label for="exampleInputUsername1">CEA </label>
-                        <input type="checkbox" name="biochemistry" value="CEA" onChange={handleChange} />
-                    </div>
-                    <div class="col-4 col-md-3 form-group pb-3">
-                        <label for="exampleInputUsername1">CA 1 </label>
-                        <input type="checkbox" name="biochemistry" value="CA 1" onChange={handleChange} />
-                    </div>
+                  <div class="col-4 col-md-3 form-group pb-3">
+                      <input type="checkbox" name="biochemistry" value="CEA" onChange={handleChange} />
+                      <label for="exampleInputUsername1"> &nbsp; CEA </label>
+                  </div>
+                  <div class="col-4 col-md-3 form-group pb-3">
+                      <input type="checkbox" name="biochemistry" value="CA 1" onChange={handleChange} />
+                      <label for="exampleInputUsername1"> &nbsp; CA 1 </label>
+                  </div>
+                  <div class="col-4 col-md-3 form-group pb-3">
+                      <input type="checkbox" name="biochemistry" value="CA 5" onChange={handleChange} />
+                      <label for="exampleInputUsername1"> &nbsp; CA 5 </label>
+                  </div>
+                  <div class="col-4 col-md-3 form-group pb-3">
+                    <input type="checkbox" name="biochemistry" value="HIV 12" onChange={handleChange} />
+                    <label for="exampleInputUsername1"> &nbsp; HIV 1 &amp; 2</label>
+                  </div>
+                  <div class="col-4 col-md-3 form-group pb-3">
+                      <input type="checkbox" name="biochemistry" value="Uric Acid" onChange={handleChange} />
+                      <label for="exampleInputUsername1"> &nbsp; Uric Acid </label>
+                  </div>
+                  <div class="col-4 col-md-3 form-group pb-3">
+                      <input type="checkbox" name="biochemistry" value="Glucose" onChange={handleChange} />
+                      <label for="exampleInputUsername1"> &nbsp; Glucose </label>
+                  </div>
+                  <div class="col-4 col-md-3 form-group pb-3">
+                    <input type="checkbox" name="biochemistry" value="Free T4" onChange={handleChange} />
+                    <label for="exampleInputUsername1"> &nbsp; Free T4</label>
+                  </div>
+                  <div class="col-4 col-md-3 form-group pb-3">
+                      <input type="checkbox" name="biochemistry" value="PSA" onChange={handleChange} />
+                      <label for="exampleInputUsername1"> &nbsp; PSA</label>
+                  </div>
+                  <div class="col-4 col-md-3 form-group pb-3">
+                      <input type="checkbox" name="biochemistry" value="CA 9" onChange={handleChange} />
+                      <label for="exampleInputUsername1"> &nbsp; CA 9 </label>
+                  </div>
 
-                    <div class="col-4 col-md-3 form-group pb-3">
-                        <label for="exampleInputUsername1">CEA </label>
-                        <input type="checkbox" name="biochemistry" value="CEA" onChange={handleChange} />
-                    </div>
-                    <div class="col-4 col-md-3 form-group pb-3">
-                        <label for="exampleInputUsername1">CA 1 </label>
-                        <input type="checkbox" name="biochemistry" value="CA 1" onChange={handleChange} />
-                    </div><div class="col-4 col-md-3 form-group pb-3">
-                        <label for="exampleInputUsername1">CEA </label>
-                        <input type="checkbox" name="biochemistry" value="CEA" onChange={handleChange} />
-                    </div>
-                    <div class="col-4 col-md-3 form-group pb-3">
-                        <label for="exampleInputUsername1">CA 1 </label>
-                        <input type="checkbox" name="biochemistry" value="CA 1" onChange={handleChange} />
-                    </div><div class="col-4 col-md-3 form-group pb-3">
-                        <label for="exampleInputUsername1">CEA </label>
-                        <input type="checkbox" name="biochemistry" value="CEA" onChange={handleChange} />
-                    </div>
-                    <div class="col-4 col-md-3 form-group pb-3">
-                        <label for="exampleInputUsername1">CA 1 </label>
-                        <input type="checkbox" name="biochemistry" value="CA 1" onChange={handleChange} />
-                    </div><div class="col-4 col-md-3 form-group pb-3">
-                        <label for="exampleInputUsername1">CEA </label>
-                        <input type="checkbox" name="biochemistry" value="CEA" onChange={handleChange} />
-                    </div>
-                    <div class="col-4 col-md-3 form-group pb-3">
-                        <label for="exampleInputUsername1">CA 1 </label>
-                        <input type="checkbox" name="biochemistry" value="CA 1" onChange={handleChange} />
-                    </div>
-                      
-                      
-                    
-                    <div className="col-6 col-md-3">
-                        <input type="checkbox" name="biochemistry" value="CA 5" onChange={handleChange} 
-                        {...register("biochemistry")} />
-                        <label htmlFor=""> &nbsp; CA 5</label>
-                    </div>
-                    <div className="col-6 col-md-3">
-                        <input type="checkbox" name="biochemistry" value="HIV 1" onChange={handleChange} 
-                        {...register("biochemistry")} />
-                        <label htmlFor=""> &nbsp; HIV 1 &amp; 2</label>
-                    </div>
-                    <div className="col-6 col-md-3">
-                        <input type="checkbox" name="biochemistry" value="Uric Acid" onChange={handleChange} 
-                        {...register("biochemistry")} />
-                        <label htmlFor=""> &nbsp; Uric Acid</label>
-                    </div>
-                    <div className="col-6 col-md-3">
-                        <input type="checkbox" name="biochemistry" value="Glucose" onChange={handleChange} 
-                        {...register("biochemistry")} />
-                        <label htmlFor=""> &nbsp; Glucose</label>
-                    </div>
-                    <div className="col-6 col-md-3">
-                        <input type="checkbox" name="biochemistry" value="Free T4" onChange={handleChange} 
-                        {...register("biochemistry")} />
-                        <label htmlFor=""> &nbsp; Free T4</label>
-                    </div>
-                    <div className="col-6 col-md-3">
-                        <input type="checkbox" name="biochemistry" value="PSA" onChange={handleChange} 
-                        {...register("biochemistry")} />
-                        <label htmlFor=""> &nbsp; PSA</label>
-                    </div>
-                    <div className="col-6 col-md-3">
-                        <input type="checkbox" name="biochemistry" value="CA 9" onChange={handleChange} 
-                        {...register("biochemistry")} />
-                        <label htmlFor=""> &nbsp; CA 9</label>
-                    </div>
-                    <div className="col-6 col-md-3">
-                        <input type="checkbox" name="biochemistry" value="HBA1c" onChange={handleChange} 
-                        {...register("biochemistry")} />
-                        <label htmlFor=""> &nbsp; HBA1c</label>
-                    </div>
-                    <div className="col-6 col-md-3">
-                        <input type="checkbox" name="biochemistry" value="HBSAc" onChange={handleChange} 
-                        {...register("biochemistry")} />
-                        <label htmlFor=""> &nbsp; HBSAc</label>
-                    </div>
-                    <div className="col-6 col-md-3">
-                        <input type="checkbox" name="biochemistry" value="H. Pylari" onChange={handleChange} 
-                        {...register("biochemistry")} />
-                        <label htmlFor=""> &nbsp; H. Pylari</label>
-                    </div>
+                  <div class="col-4 col-md-3 form-group pb-3">
+                    <input type="checkbox" name="biochemistry" value="HBA1c" onChange={handleChange} />
+                    <label for="exampleInputUsername1"> &nbsp; HBA1c</label>
+                  </div>
+                  <div class="col-4 col-md-3 form-group pb-3">
+                      <input type="checkbox" name="biochemistry" value="HBSAc" onChange={handleChange} />
+                      <label for="exampleInputUsername1"> &nbsp; HBSAc</label>
+                  </div>
+                  <div class="col-4 col-md-3 form-group pb-3">
+                      <input type="checkbox" name="biochemistry" value="H. Pylari" onChange={handleChange} />
+                      <label for="exampleInputUsername1"> &nbsp; H. Pylari</label>
+                  </div>
                 </div>
+              </div><hr />
+
+              <div class="form-row"> 
+                <div class="col-12 mb-3">
+                    <br /><h6 className="seofct-icon pb-0 mb-0"><i className="fa fa-flask"></i> <b>Haematology</b></h6>
+                </div>
+                <div class="row custom-checkboxes px-2 text-dark">
+                <div class="col-4 col-md-3 form-group pb-3">
+                    <input type="checkbox" name="haematology" value="FBE" onChange={handleChange} />
+                    <label for="exampleInputUsername1"> &nbsp; FBE </label>
+                </div>
+                <div class="col-4 col-md-3 form-group pb-3">
+                    <input type="checkbox" name="haematology" value="FBC" onChange={handleChange} />
+                    <label for="exampleInputUsername1"> &nbsp; FBC</label>
+                </div>
+                <div class="col-4 col-md-3 form-group pb-3">
+                    <input type="checkbox" name="haematology" value="HB" onChange={handleChange} />
+                    <label for="exampleInputUsername1"> &nbsp; HB</label>
+                </div>
+                <div class="col-4 col-md-3 form-group pb-3">
+                  <input type="checkbox" name="haematology" value="TWDC" onChange={handleChange} />
+                  <label for="exampleInputUsername1"> &nbsp; TWDC</label>
+                </div>
+                <div class="col-4 col-md-3 form-group pb-3">
+                    <input type="checkbox" name="haematology" value="Platelets" onChange={handleChange} />
+                    <label for="exampleInputUsername1"> &nbsp; Platelets</label>
+                </div>
+                <div class="col-4 col-md-3 form-group pb-3">
+                    <input type="checkbox" name="haematology" value="ABO and RH (D)" onChange={handleChange} />
+                    <label for="exampleInputUsername1"> &nbsp; ABO and RH (D) </label>
+                </div>
+                <div class="col-4 col-md-3 form-group pb-3">
+                  <input type="checkbox" name="haematology" value="Malaria Parasites" onChange={handleChange} />
+                  <label for="exampleInputUsername1"> &nbsp; Malaria Parasites</label>
+                </div>
+              </div>
             </div><hr />
 
-            <div className="form-row"> 
-                <div className="col-12 mb-3">
-                    <br /><h6 className="seofct-icon pb-0 mb-0"><i className="fa fa-stethoscope"></i> <b>Haematology</b></h6>
+            <div class="form-row"> 
+              <div class="col-12 mb-3">
+                  <br /><h6 className="seofct-icon pb-0 mb-0"><i className="fa fa-flask"></i> <b>Microbiology</b></h6>
+              </div>
+              <div class="row custom-checkboxes px-2 text-dark">
+                <div class="col-4 col-md-3 form-group pb-3">
+                    <input type="checkbox" name="microbiology" value="Urine" onChange={handleChange} />
+                    <label for="exampleInputUsername1"> &nbsp; Urine</label>
                 </div>
-                <div className="row custom-checkboxes px-2 text-dark">
-                    <div className="col-6 col-md-3">
-                        <input type="checkbox" name="haematology" value="FBE" onChange={handleChange} 
-                        {...register("haematology")} />
-                        <label htmlFor=""> &nbsp; FBE</label>
-                    </div>
-                    <div className="col-6 col-md-3">
-                        <input type="checkbox" name="haematology" value="FBC" onChange={handleChange} 
-                        {...register("haematology")} />
-                        <label htmlFor=""> &nbsp; FBC</label>
-                    </div>
-                    <div className="col-6 col-md-3">
-                        <input type="checkbox" name="haematology" value="HB" onChange={handleChange} 
-                        {...register("haematology")} />
-                        <label htmlFor=""> &nbsp; HB</label>
-                    </div>
-                    <div className="col-6 col-md-3">
-                        <input type="checkbox" name="haematology" value="TWDC" onChange={handleChange} 
-                        {...register("haematology")} />
-                        <label htmlFor=""> &nbsp; TWDC</label>
-                    </div>
-                    <div className="col-6 col-md-3">
-                        <input type="checkbox" name="haematology" value="Platelets" onChange={handleChange} 
-                        {...register("haematology")} />
-                        <label htmlFor=""> &nbsp; Platelets</label>
-                    </div>
-                    <div className="col-6 col-md-3">
-                        <input type="checkbox" name="haematology" value="ABO and RH (D)" onChange={handleChange} 
-                        {...register("haematology")} />
-                        <label htmlFor=""> &nbsp; ABO and RH (D)</label>
-                    </div>
-                    <div className="col-6 col-md-3">
-                        <input type="checkbox" name="haematology" value="Malaria Parasites" onChange={handleChange} 
-                        {...register("haematology")} />
-                        <label htmlFor=""> &nbsp; Malaria Parasites</label>
-                    </div>
+                <div class="col-4 col-md-3 form-group pb-3">
+                    <input type="checkbox" name="microbiology" value="Microscopy" onChange={handleChange} />
+                    <label for="exampleInputUsername1"> &nbsp; Microscopy</label>
                 </div>
+                <div class="col-4 col-md-3 form-group pb-3">
+                    <input type="checkbox" name="microbiology" value="RPR (VDRL)" onChange={handleChange} />
+                    <label for="exampleInputUsername1"> &nbsp; RPR (VDRL)</label>
+                </div>
+                <div class="col-4 col-md-3 form-group pb-3">
+                  <input type="checkbox" name="microbiology" value="AFB (Smear)" onChange={handleChange} />
+                  <label for="exampleInputUsername1"> &nbsp; AFB (Smear)</label>
+                </div>
+                <div class="col-4 col-md-3 form-group pb-3">
+                    <input type="checkbox" name="microbiology" value="AFB(Smear/Culture)" onChange={handleChange} />
+                    <label for="exampleInputUsername1"> &nbsp; AFB(Smear/Culture)</label>
+                </div>
+                <div class="col-4 col-md-3 form-group pb-3">
+                    <input type="checkbox" name="microbiology" value="G2000" onChange={handleChange} />
+                    <label for="exampleInputUsername1"> &nbsp; G2000</label>
+                </div>
+              </div>
             </div><hr />
-
-            <div className="form-row"> 
-                <div className="col-12 mb-3">
-                    <br /><h6 className="seofct-icon pb-0 mb-0"><i className="fa fa-microscope"></i> <b>Microbiology</b></h6>
-                </div>
-                <div className="row custom-checkboxes px-2 text-dark">
-                    <div className="col-12 col-md-3">
-                        <input type="checkbox" name="microbiology" value="Urine" onChange={handleChange} 
-                        {...register("microbiology")} />
-                        <label htmlFor=""> &nbsp; Urine</label>
-                    </div>
-                    <div className="col-12 col-md-3">
-                        <input type="checkbox" name="microbiology" value="Microscopy" onChange={handleChange} 
-                        {...register("microbiology")} />
-                        <label htmlFor=""> &nbsp; Microscopy</label>
-                    </div>
-                    <div className="col-12 col-md-3">
-                        <input type="checkbox" name="microbiology" value="RPR (VDRL)" onChange={handleChange} 
-                        {...register("microbiology")} />
-                        <label htmlFor=""> &nbsp; RPR (VDRL)</label>
-                    </div>
-                    <div className="col-12 col-md-3">
-                        <input type="checkbox" name="microbiology" value="AFB (Smear)" onChange={handleChange} 
-                        {...register("microbiology")} />
-                        <label htmlFor=""> &nbsp; AFB (Smear)</label>
-                    </div>
-                    <div className="col-12 col-md-3">
-                        <input type="checkbox" name="microbiology" value="AFB (Smear+Culture)" onChange={handleChange} 
-                        {...register("microbiology")} />
-                        <label htmlFor=""> &nbsp; AFB(Smear/Culture)</label>
-                    </div>
-                    <div className="col-12 col-md-3">
-                        <input type="checkbox" name="microbiology" value="G2000" onChange={handleChange} 
-                        {...register("microbiology")} />
-                        <label htmlFor=""> &nbsp; G2000</label>
-                    </div>
-                </div>
-            </div>
-              
-              <!-- <div class="col-12 col-md-12 form-group pb-3">
-                <label for="exampleInputUsername1">Diagnosis </label>
-                <textarea name="diagnosis" class="form-control" placeholder="Diagnosis" required></textarea>
-                <small id="emailHelp" class="form-text text-muted"><span class="text-danger">Required. </span></small>
-              </div>
-              
-              <div class="col-8 col-md-4 form-group pb-3">
-                <label for="exampleInputUsername1">Medicine 1 </label>
-                <input type="text" name="medicine_1" class="form-control" placeholder="Medicine e.g. Paracetamol" maxlength="40" required />
-                <small id="emailHelp" class="form-text text-muted"><span class="text-danger">Required. </span> Max. 40 characters</small>
-              </div>
-              <div class="col-4 col-md-2 form-group pb-3">
-                <label for="exampleInputUsername1">Med. 1 Dose</label>
-                <select name="med1_dose" class="form-control" required>
-                  <option value="">- Choose -</option>
-                  <option value="1x_daily">1x daily</option>
-                  <option value="2x_daily">2x daily</option>
-                  <option value="3x_daily">3x daily</option>
-                  <option value="morning_only">Morning only</option>
-                  <option value="night_only">Night only</option>
-                  <option value="before_meal">Before Meal</option>
-                  <option value="not_specified">Not specified</option>
-                </select>
-                <small id="emailHelp" class="form-text text-muted"><span class="text-danger">Required. </span></small>
-              </div>
-
-              <div class="col-8 col-md-4 form-group pb-3">
-                <label for="exampleInputUsername1">Medicine 2 </label>
-                <input type="text" name="medicine_2" class="form-control" maxlength="40" />
-                <small id="emailHelp" class="form-text text-muted">Max. 40 characters</small>
-              </div>
-              <div class="col-4 col-md-2 form-group pb-3">
-                <label for="exampleInputUsername1">Med. 2 Dose</label>
-                <select name="med2_dose" class="form-control">
-                  <option value="">- Choose -</option>
-                  <option value="1x_daily">1x daily</option>
-                  <option value="2x_daily">2x daily</option>
-                  <option value="3x_daily">3x daily</option>
-                  <option value="morning_only">Morning only</option>
-                  <option value="night_only">Night only</option>
-                  <option value="before_meal">Before Meal</option>
-                  <option value="not_specified">Not specified</option>
-                </select>
-              </div>
-
-              <div class="col-8 col-md-4 form-group pb-3">
-                <label for="exampleInputUsername1">Medicine 3 </label>
-                <input type="text" name="medicine_3" class="form-control" maxlength="40" />
-                <small id="emailHelp" class="form-text text-muted">Max. 40 characters</small>
-              </div>
-              <div class="col-4 col-md-2 form-group pb-3">
-                <label for="exampleInputUsername1">Med. 3 Dose</label>
-                <select name="med3_dose" class="form-control">
-                  <option value="">- Choose -</option>
-                  <option value="1x_daily">1x daily</option>
-                  <option value="2x_daily">2x daily</option>
-                  <option value="3x_daily">3x daily</option>
-                  <option value="morning_only">Morning only</option>
-                  <option value="night_only">Night only</option>
-                  <option value="before_meal">Before Meal</option>
-                  <option value="not_specified">Not specified</option>
-                </select>
-              </div>
-
-              <div class="col-8 col-md-4 form-group pb-3">
-                <label for="exampleInputUsername1">Medicine 4 </label>
-                <input type="text" name="medicine_4" class="form-control" maxlength="40" />
-                <small id="emailHelp" class="form-text text-muted">Max. 40 characters</small>
-              </div>
-              <div class="col-4 col-md-2 form-group pb-3">
-                <label for="exampleInputUsername1">Med. 4 Dose</label>
-                <select name="med4_dose" class="form-control">
-                  <option value="">- Choose -</option>
-                  <option value="1x_daily">1x daily</option>
-                  <option value="2x_daily">2x daily</option>
-                  <option value="3x_daily">3x daily</option>
-                  <option value="morning_only">Morning only</option>
-                  <option value="night_only">Night only</option>
-                  <option value="before_meal">Before Meal</option>
-                  <option value="not_specified">Not specified</option>
-                </select>
-              </div>
-
-              <div class="col-8 col-md-4 form-group pb-3">
-                <label for="exampleInputUsername1">Medicine 5 </label>
-                <input type="text" name="medicine_5" class="form-control" maxlength="40" />
-                <small id="emailHelp" class="form-text text-muted">Max. 40 characters</small>
-              </div>
-              <div class="col-4 col-md-2 form-group pb-3">
-                <label for="exampleInputUsername1">Med. 5 Dose</label>
-                <select name="med5_dose" class="form-control">
-                  <option value="">- Choose -</option>
-                  <option value="1x_daily">1x daily</option>
-                  <option value="2x_daily">2x daily</option>
-                  <option value="3x_daily">3x daily</option>
-                  <option value="morning_only">Morning only</option>
-                  <option value="night_only">Night only</option>
-                  <option value="before_meal">Before Meal</option>
-                  <option value="not_specified">Not specified</option>
-                </select>
-              </div>
-
-              <div class="col-8 col-md-4 form-group pb-3">
-                <label for="exampleInputUsername1">Medicine 6 </label>
-                <input type="text" name="medicine_6" class="form-control" maxlength="40" />
-                <small id="emailHelp" class="form-text text-muted">Max. 40 characters</small>
-              </div>
-              <div class="col-4 col-md-2 form-group pb-3">
-                <label for="exampleInputUsername1">Med. 6 Dose</label>
-                <select name="med6_dose" class="form-control">
-                  <option value="">- Choose -</option>
-                  <option value="1x_daily">1x daily</option>
-                  <option value="2x_daily">2x daily</option>
-                  <option value="3x_daily">3x daily</option>
-                  <option value="morning_only">Morning only</option>
-                  <option value="night_only">Night only</option>
-                  <option value="before_meal">Before Meal</option>
-                  <option value="not_specified">Not specified</option>
-                </select>
-              </div> -->
-              
               <input type="text" name="created_by" class="form-control" value="{{user.userprofile.first_name}} {{user.userprofile.last_name}}" style="display: none" />
               <div class="col-6 form-group pb-3">
                 <button class="btn btn-primary me-2">Save Record</button>
