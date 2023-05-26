@@ -22,7 +22,8 @@ def write_note_soap(request):
 			form_not_valid(request)
 	else:
 		form = WriteNoteForm() 
-		pass_data = {'form': form, 'company':company, 'patients':patients}
+	
+	pass_data = {'form': form, 'company':company, 'patients':patients}
 	return render(request, 'doctor/write_note_soap.html', pass_data)
 	
 	
@@ -46,7 +47,8 @@ def record_triage(request):
 			form_not_valid()
 	else:
 		form = RecordTriageForm() 
-		pass_data = {'form': form, 'company':company, 'patients':patients}
+	
+	pass_data = {'form': form, 'company':company, 'patients':patients}
 	return render(request, 'nurse/record_triage.html', pass_data)
 
 @login_required
@@ -69,7 +71,8 @@ def dispense_drugs(request):
 			form_not_valid()
 	else:
 		form = DispenseDrugsForm() 
-		pass_data = {'form': form, 'company':company, 'patients':patients}
+
+	pass_data = {'form': form, 'company':company, 'patients':patients}
 	return render(request, 'pharmacist/dispense_drugs.html', pass_data)
 
 @login_required
@@ -92,7 +95,8 @@ def record_labresult(request):
 			form_not_valid()
 	else:
 		form = RecordLabResultForm() 
-		pass_data = {'form': form, 'company':company, 'patients':patients}
+
+	pass_data = {'form': form, 'company':company, 'patients':patients}
 	return render(request, 'lab/record_labresult.html', pass_data)
 
 # Lab Scientist and Doctor
@@ -105,18 +109,22 @@ def view_labresult(request):
 @login_required
 def request_labtest_lab(request):
 	patients = Patient.objects.all()
+	tests = request.POST.getlist('biochemistry')
 
-	if request.method == 'POST':
+	if request.method == "POST":
 		form = RequestLabtestLabForm(request.POST) 
+
 		if form.is_valid():
-			form_valid(request, form, 'Request Lab test', 'New Record!')
+			form_valid(request, form, 'Request Labtest', 'New Record!')
+			print(tests)
 			# additional codes here
-			return redirect('record_labresult')
+			return redirect('request_labtest_lab')
 		else:
 			form_not_valid()
 	else:
 		form = RequestLabtestLabForm() 
-		pass_data = {'form': form, 'company':company, 'patients':patients}
+
+	pass_data = {'form': form, 'company':company, 'patients':patients, 'tests':tests}
 	return render(request, 'doctor/request_labtest_lab.html', pass_data)
 
 # Doctor
