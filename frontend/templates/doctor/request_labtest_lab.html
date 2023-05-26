@@ -76,7 +76,9 @@
                   </div>
                 </div>
               </div><hr />
-              <input type="text" name="coursename" id="txtvalues" />
+              {% if tests %}
+                {{ tests }}
+              {% endif %}
 
               <div class="form-row"> 
                 <div class="col-12 mb-3">

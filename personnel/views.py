@@ -115,8 +115,11 @@ def request_labtest_lab(request):
 		form = RequestLabtestLabForm(request.POST) 
 
 		if form.is_valid():
-			form_valid(request, form, 'Request Labtest', 'New Record!')
-			print(tests)
+			form.tests = tests
+			print(form.tests)
+			form.save(commit=False) 
+			biochemistry = form.tests 
+			form.save()
 			# additional codes here
 			return redirect('request_labtest_lab')
 		else:
