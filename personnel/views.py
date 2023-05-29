@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from patient.models import Patient
 from record.models import SoapNotes, Triage, DispenseDrugs, RecordLabResult, RequestLabtest_Lab
-from record.forms import WriteNoteForm, RecordTriageForm, DispenseDrugsForm, RecordLabResultForm, RequestLabtestLabForm
+from record.forms import WriteNoteForm, RecordTriageForm, DispenseDrugsForm, RecordLabResultForm, RequestLabtestLabForm, RequestDrugDispensingForm, RequestTriageNurseForm
 from django.contrib import messages
 
 company = "Beyond's Healthcare and Fertility Center"
@@ -15,7 +15,7 @@ def write_note_soap(request):
 	if request.method == 'POST':
 		form = WriteNoteForm(request.POST) 
 		if form.is_valid():
-			form_valid(request, form, 'Note', 'New Record!')
+			form_valid(request, form, 'S.O.A.P. NOTE', 'Successful!')
 			# additional codes here
 			return redirect('write_note_soap')
 		else:
@@ -40,7 +40,7 @@ def record_triage(request):
 	if request.method == 'POST':
 		form = RecordTriageForm(request.POST) 
 		if form.is_valid():
-			form_valid(request, form, 'Triage', 'New Record!')
+			form_valid(request, form, 'TRIAGE', 'Successful!')
 			# additional codes here
 			return redirect('record_triage')
 		else:
@@ -64,7 +64,7 @@ def dispense_drugs(request):
 	if request.method == 'POST':
 		form = DispenseDrugsForm(request.POST) 
 		if form.is_valid():
-			form_valid(request, form, 'Dispense Drugs', 'New Record!')
+			form_valid(request, form, 'DISPENSE DRUGS', 'Successful!')
 			# additional codes here
 			return redirect('dispense_drugs')
 		else:
@@ -83,12 +83,18 @@ def view_dispensed(request):
 # Lab Scientist
 @login_required
 def record_labresult(request):
+	record_labresults = RequestLabtest_Lab.objects.all()
+	return render(request,'lab/record_labresult.html', {'company':company, 'record_labresults': record_labresults})
+
+# Lab Scientist
+@login_required
+def record_labresult_save(request):
 	patients = Patient.objects.all()
 
 	if request.method == 'POST':
 		form = RecordLabResultForm(request.POST) 
 		if form.is_valid():
-			form_valid(request, form, 'Record LabResult', 'New Record!')
+			form_valid(request, form, 'RECORD LAB RESULT', 'Successful!')
 			# additional codes here
 			return redirect('record_labresult')
 		else:
@@ -109,25 +115,21 @@ def view_labresult(request):
 @login_required
 def request_labtest_lab(request):
 	patients = Patient.objects.all()
-	tests = request.POST.getlist('biochemistry')
 
 	if request.method == "POST":
-		form = RequestLabtestLabForm(request.POST) 
-
+		form = RequestLabtestLabForm(request.POST)
+		
 		if form.is_valid():
-			form.tests = tests
-			print(form.tests)
-			form.save(commit=False) 
-			biochemistry = form.tests 
-			form.save()
-			# additional codes here
+			form.patient_id = patients
+			form.tests = request.POST.getlist('tests')
+			form_valid(request, form, 'REQUEST LAB TEST', 'Successful!')
 			return redirect('request_labtest_lab')
 		else:
-			form_not_valid()
+			form_not_valid(request)
 	else:
 		form = RequestLabtestLabForm() 
 
-	pass_data = {'form': form, 'company':company, 'patients':patients, 'tests':tests}
+	pass_data = {'form': form, 'company':company, 'patients':patients}
 	return render(request, 'doctor/request_labtest_lab.html', pass_data)
 
 # Doctor
@@ -136,19 +138,59 @@ def view_requestlabtest_lab(request):
 	view_requestlabtest_lab = RequestLabtest_Lab.objects.all()
 	return render(request,'doc/view_requestlabtest_lab.html', {'company':company, 'view_requestlabtest_lab': view_requestlabtest_lab})
 
+# Doctor
+@login_required
+def request_drug_dispensing(request):
+	patients = Patient.objects.all()
+
+	if request.method == "POST":
+		form = RequestDrugDispensingForm(request.POST)
+		
+		if form.is_valid():
+			form.patient_id = patients
+			form.drugs = request.POST.getlist('drugs')
+			form_valid(request, form, 'REQUEST DRUG DISPENSING', 'Successful!')
+			return redirect('request_drug_dispensing')
+		else:
+			form_not_valid(request)
+	else:
+		form = RequestDrugDispensingForm() 
+
+	pass_data = {'form': form, 'company':company, 'patients':patients}
+	return render(request, 'doctor/request_drug_dispensing.html', pass_data)
+
+# Doctor
+@login_required
+def request_triage_nurse(request):
+	patients = Patient.objects.all()
+
+	if request.method == "POST":
+		form = RequestTriageNurseForm(request.POST)
+		
+		if form.is_valid():
+			form.patient_id = patients
+			form_valid(request, form, 'TRIAGE REQUEST SENT', 'Successful!')
+			return redirect('request_triage_nurse')
+		else:
+			form_not_valid(request)
+	else:
+		form = RequestTriageNurseForm() 
+
+	pass_data = {'form': form, 'company':company, 'patients':patients}
+	return render(request, 'doctor/request_triage_nurse.html', pass_data)
 
 # Misc function
 def form_valid(request, form, subject, msg):
 	form.save() 
 	msg_title = msg
-	msg_text = f'{subject} is saved successfully!'
+	msg_text = f'{subject} IS SAVED SUCCESSFULLY!'
 	messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
 
 # Misc function
 def form_not_valid(request):
 	msg_title = 'Error!'
-	msg_text = 'Record was NOT saved!'
-	messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
+	msg_text = 'ERROR! RECORD HAS NOT BEEN SAVED!'
+	messages.add_message(request, messages.INFO, msg_text, extra_tags=msg_title)
 
 # @login_required
 # def manager(request):

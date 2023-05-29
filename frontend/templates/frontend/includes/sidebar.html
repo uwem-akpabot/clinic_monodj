@@ -73,13 +73,13 @@
 		  <li class="menu-item">
 			<!-- <a href="view_testresult_lab" class="menu-link"> -->
 			<a href="" class="menu-link">
-			  <div data-i18n="Connections">View TestResult (Lab)</div>
+			  <div data-i18n="Connections">x View TestResult (Lab)</div>
 			</a>
 		  </li>
 
 		  <li class="menu-item">
 			<!-- <a href="request_triage_nurse" class="menu-link"> -->
-			<a href="" class="menu-link">
+			<a href="{% url 'request_triage_nurse' %}" class="menu-link">
 			  <div data-i18n="Connections">Request Triage (Nurse)</div>
 			</a>
 		  </li>
@@ -90,7 +90,7 @@
 		  </li>
 
 		  <li class="menu-item">
-			<a href="{% url 'dispense_drugs' %}" class="menu-link">
+			<a href="{% url 'request_drug_dispensing' %}" class="menu-link">
 			  <div data-i18n="Connections">Request Drug (Pharm)</div>
 			</a>
 		  </li>

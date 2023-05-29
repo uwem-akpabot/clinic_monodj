@@ -1,0 +1,47 @@
+{% extends 'frontend/base.html' %}
+
+{% block title %}Request Triage from Nurse{% endblock %}
+{% load static %}
+
+{% block content %}
+<!-- Doctors and Admins -->
+{% if user.userprofile.is_doc or user.userprofile.is_admin %}
+<div class="content-wrapper">
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+      <div class="col-xl">
+      <div class="card mb-4">
+        <div class="card-body">      
+          <h4 class="card-title">Request Triage from Nurse / <small class="text-primary">{{company|slice:"0:19"}}</small></h4>
+          <p class="card-description">Fill out this form to request triage from Nurse</p>
+          <form method="POST" action="." class="forms-sample">
+            {% csrf_token %}
+            
+            <div class="row">
+              {% include 'frontend/includes/select_patient_and_date.html' %}
+              
+              <div class="col-12 col-md-12 form-group pb-3">
+                <label for="exampleInputUsername1">Comment/instruction to nurse </label>
+                <textarea name="comment" class="form-control" placeholder="Additional comment ... e.g. Take the vital signs only" required></textarea>
+                <small id="emailHelp" class="form-text text-muted"><span class="text-danger">Required. </span></small>
+              </div>
+            </div>
+            
+            <input type="text" name="created_by" class="form-control" value="{{user.userprofile.first_name}} {{user.userprofile.last_name}}" style="display: none" />
+            <div class="col-6 form-group pb-3">
+              <button class="btn btn-primary me-2">Save Record</button>
+              <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+            </div>
+            <br />
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+{% else %}
+  {% include 'frontend/includes/page_unauthorized.html' %}
+{% endif %}
+
+{% endblock %}

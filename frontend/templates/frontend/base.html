@@ -66,28 +66,13 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
     <script src="{% static 'js/sweet.min.js' %}"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-  $(document).ready(function(){
-    $('.chkcvalues').click(function(){
-      var text = "";
-      $('.chkcvalues').each(function(){
-        txt += $(this).val()+", ";
-        alert(txt)
-      });
-      txt = txt.substring(0, txt.length - 1);
-      $('#txtvalues').val(txt);
-    });
-  });
-</script>
-
+    
     <script>
       {% for msg in messages %}
         swal({
           title: "{{msg.extra_tags}}!",
           text: "{{msg}}",
-          icon: "success",
+          icon: "info",
           button: "Ok"
         })
       {% endfor %}
