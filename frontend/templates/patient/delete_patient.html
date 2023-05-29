@@ -1,0 +1,31 @@
+{% extends 'frontend/base.html' %}
+
+{% block title %}Delete Patient{% endblock %}
+{% load static %}
+
+{% block content %}
+<div class="content-wrapper">
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+      <div class="col-xl">
+      <div class="card mb-4">
+        <div class="card-body">      
+          <h4 class="card-title">Delete Patient / <small class="text-primary">{{company|slice:"0:19"}}</small></h4>
+          <p class="card-description">Choose whether to delete the patient</p>
+          <form method="POST" action="{% url 'delete_patient' patient.id %}" class="forms-sample">
+            {% csrf_token %}
+            <h4 class="card-title text-primary my-3 mt-4">Are you sure you want to delete <span class="text-primary"><u>{{patient.fname}} {{patient.sname}}</u></span>?</h4>
+            <div class="row">
+              <div class="col-6 form-group pb-3">
+                <input type="submit" name="Confirm" value="Confirm" class="btn btn-primary me-2" />
+                <a href="javascript:history.back()" class="btn btn-danger">Cancel</a>
+              </div><br />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

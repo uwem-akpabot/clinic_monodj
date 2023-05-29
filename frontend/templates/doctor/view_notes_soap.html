@@ -29,7 +29,7 @@
             <tbody class="table-border-bottom-0">
               {% for soap in soapnotes %}
               <tr>
-                <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{soap.patient_id}}</strong></td>
+                <td><strong><a href="{% url 'patient_detail' soap.patient.id %}">{{soap.patient.fname}} {{soap.patient.sname}}</a></strong></td>
                 <td>{{soap.date_of_visit}}</td>
                 <td>{{soap.subjective|slice:"0:30"}}</td>
                 <td><span class="badge bg-label-success me-1">Active</span></td>

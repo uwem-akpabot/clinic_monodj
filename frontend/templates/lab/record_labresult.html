@@ -23,17 +23,15 @@
                 <th>Patient</th>
                 <th>Date of Visit</th>
                 <th>Lab Tests to take</th>
-                <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-              {% for record_labresult in record_labresults %}
+              {% for record_lab in record_labresults %}
               <tr>
-                <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{record_labresult.patient_id}}</strong></td>
-                <td>{{ record_labresult.date_of_visit }}</td>
-                <td>{{ record_labresult.tests }}</td>
-                <td><span class="badge bg-label-success me-1">Active</span></td>
+                <td><strong><a href="{% url 'patient_detail' record_lab.patient.id %}">{{record_lab.patient.fname}} {{record_lab.patient.sname}}</a></strong></td>
+                <td>{{ record_lab.date_of_visit }}</td>
+                <td>{{ record_lab.tests }}</td>
                 <td>
                   <div class="dropdown">
                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

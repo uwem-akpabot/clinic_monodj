@@ -21,7 +21,7 @@
             <thead>
               <tr>
                 <th>Patient</th>
-                <th>Date of Visit</th>
+                <th>Date</th>
                 <th>Temp</th>
                 <th>bp</th>
                 <th>pulse</th>
@@ -33,7 +33,7 @@
             <tbody class="table-border-bottom-0">
               {% for triage in triages %}
               <tr>
-                <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{triage.patient_id}}</strong></td>
+                <td><strong><a href="{% url 'patient_detail' triage.patient.id %}">{{triage.patient.fname}} {{triage.patient.sname}}</a></strong></td>
                 <td>{{triage.date_of_visit}}</td>
                 <td>{{triage.temp}}</td>
                 <td>{{triage.bp}}</td>
@@ -41,7 +41,6 @@
                 <td>{{triage.weight}}</td>
                 <td>{{triage.height}}</td>
                 <td>{{triage.bmi}}</td>
-                <td><span class="badge bg-label-success me-1">Active</span></td>
                 <td>
                   <div class="dropdown">
                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

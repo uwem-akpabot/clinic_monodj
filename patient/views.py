@@ -31,6 +31,51 @@ def patients(request):
 	patients = Patient.objects.all()
 	return render(request,'patient/patients.html', {'company':company, 'patients': patients})
 
+#Get detail by Id
+@login_required
+def patient_detail(request, patient_id):
+	patient = Patient.objects.get(pk=patient_id)
+	return render(request, 'patient/patient_detail.html', {'company':company, 'patient': patient})
+
+#Update record
+@login_required
+def update_patient(request, patient_id):
+	patient = Patient.objects.get(pk=patient_id)
+	form = AddPatientForm(instance=patient)
+
+	if request.method == 'POST':
+		form = AddPatientForm(request.POST, instance=patient) #if submit is click and form method is POST
+
+		if form.is_valid():
+			customer = form.save() #save to database
+
+			msg_title = 'Updated!'
+			msg_text = 'Patient is saved successfully!'
+			messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
+			return redirect('patients')
+		else:
+			msg_title = 'Error!'
+			msg_text = 'Record was NOT saved!'
+			messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
+	else:
+		form = AddPatientForm() #if submit is not clicked, display empty form
+
+	return render(request, 'patient/update_patient.html', {'form': form, 'company':company, 'patient': patient})
+
+#Delete record
+@login_required
+def delete_patient(request, patient_id):
+	patient = Patient.objects.get(pk=patient_id)
+
+	if request.method == 'POST':
+		patient.delete()
+
+		msg_title = 'Deleted!'
+		msg_text = 'Patient was deleted successfully!'
+		messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
+		return redirect('patients')
+	return render(request, 'patient/delete_patient.html', {'company':company, 'patient': patient})
+
 # Misc function
 def form_valid(request, form, subject, msg):
 	form.save() 
