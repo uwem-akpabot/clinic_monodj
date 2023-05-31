@@ -14,6 +14,7 @@ urlpatterns = [
 
 	# #lab
 	path('record_labresult/', views.record_labresult, name='record_labresult'),
+    path('record_test_action/<int:record_lab_id>/', views.record_test_action, name='record_test_action'),
     path('view_labresult/', views.view_labresult, name='view_labresult'),
     #nurse
 	path('record_triage/', views.record_triage, name='record_triage'),

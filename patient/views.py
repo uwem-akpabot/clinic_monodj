@@ -47,7 +47,7 @@ def update_patient(request, patient_id):
 		form = AddPatientForm(request.POST, instance=patient) #if submit is click and form method is POST
 
 		if form.is_valid():
-			customer = form.save() #save to database
+			form.save() #save to database
 
 			msg_title = 'Updated!'
 			msg_text = 'Patient is saved successfully!'

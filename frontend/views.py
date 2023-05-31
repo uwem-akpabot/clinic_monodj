@@ -12,8 +12,11 @@ from patient.models import Patient
 company = "Beyond's Healthcare and Fertility Center"
 
 def index(request):
-	patients = Patient.objects.all()
-	return render(request, 'frontend/homepage.html', {'patients': patients, 'company': company})
+	return redirect('login')
+
+# def index(request):
+# 	patients = Patient.objects.all()
+# 	return render(request, 'frontend/homepage.html', {'patients': patients, 'company': company})
 
 def dashboard(request):
 	patients = Patient.objects.all()

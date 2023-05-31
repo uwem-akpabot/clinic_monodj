@@ -179,6 +179,31 @@ def request_triage_nurse(request):
 	pass_data = {'form': form, 'company':company, 'patients':patients}
 	return render(request, 'doctor/request_triage_nurse.html', pass_data)
 
+#Lab record_test_action
+@login_required
+def record_test_action(request, record_lab_id):
+	record_lab = RequestLabtest_Lab.objects.get(pk=record_lab_id)
+	form = RequestLabtestLabForm(instance=record_lab)
+
+	if request.method == 'POST':
+		form = RequestLabtestLabForm(request.POST, instance=record_lab) #if submit is click and form method is POST
+
+		if form.is_valid():
+			form.save() #save to database
+
+			msg_title = 'Updated!'
+			msg_text = 'Lab test is saved successfully!'
+			messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
+			return redirect('record_test_action')
+		else:
+			msg_title = 'Error!'
+			msg_text = 'Record was NOT saved!'
+			messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
+	else:
+		form = RequestLabtestLabForm() #if submit is not clicked, display empty form
+
+	return render(request, 'lab/record_test_action.html', {'form': form, 'company':company, 'record_lab': record_lab})
+
 # Misc function
 def form_valid(request, form, subject, msg):
 	form.save() 
