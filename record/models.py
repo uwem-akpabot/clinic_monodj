@@ -30,7 +30,6 @@ class Triage(models.Model):
 	medication = models.TextField()
 	nurse_report = models.TextField()
 	created_by = models.CharField(max_length=15)
-	# user = models.OneToOneField(User, related_name='SoapNotes', on_delete=models.CASCADE)
 	created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
 class DispenseDrugs(models.Model):
@@ -50,14 +49,12 @@ class DispenseDrugs(models.Model):
 	medicine_6 = models.CharField(max_length=40, blank=True)
 	med6_dose = models.CharField(max_length=15, blank=True)
 	created_by = models.CharField(max_length=15)
-	# user = models.OneToOneField(User, related_name='SoapNotes', on_delete=models.CASCADE)
 	created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
 class RecordLabResult(models.Model):
 	patient = models.ForeignKey(Patient, related_name='record_labresult', on_delete=models.CASCADE)
 	date_of_visit = models.CharField(max_length=15)
 	created_by = models.CharField(max_length=15)
-	# user = models.OneToOneField(User, related_name='SoapNotes', on_delete=models.CASCADE)
 	created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
 class RequestLabtest_Lab(models.Model):
@@ -65,7 +62,6 @@ class RequestLabtest_Lab(models.Model):
 	date_of_visit = models.CharField(max_length=15)
 	tests = models.TextField()
 	created_by = models.CharField(max_length=15)
-	# user = models.OneToOneField(User, related_name='SoapNotes', on_delete=models.CASCADE)
 	created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
 class RequestDrugDispensing(models.Model):
@@ -74,7 +70,6 @@ class RequestDrugDispensing(models.Model):
 	diagnosis = models.TextField()
 	medicine_dosage = models.TextField()
 	created_by = models.CharField(max_length=15)
-	# user = models.OneToOneField(User, related_name='SoapNotes', on_delete=models.CASCADE)
 	created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
 class RequestTriageNurse(models.Model):
@@ -82,5 +77,11 @@ class RequestTriageNurse(models.Model):
 	date_of_visit = models.CharField(max_length=15)
 	comment = models.TextField()
 	created_by = models.CharField(max_length=15)
-	# user = models.OneToOneField(User, related_name='SoapNotes', on_delete=models.CASCADE)
 	created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
+class RecordTestAction(models.Model):
+	patient = models.ForeignKey(Patient, related_name='record_testaction_pat', on_delete=models.CASCADE)
+	requestlabtest_lab = models.ForeignKey(RequestLabtest_Lab, related_name='requestlabtest_lab', on_delete=models.CASCADE)
+	test_result = models.TextField()
+	created_by = models.CharField(max_length=15)
+	# created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)

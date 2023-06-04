@@ -1,0 +1,43 @@
+{% extends 'frontend/base.html' %}
+
+{% block title %}View Lab Test Action{% endblock %}
+{% load static %}
+
+{% block content %}
+<div class="content-wrapper">
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+      <div class="col-xl">
+      <div class="card mb-4">
+        <div class="card-body">      
+          <h4 class="card-title">{{view_lab.patient.fname}}'s Profile / <small class="text-primary">{{company|slice:"0:19"}}</small></h4>
+          
+          <form method="POST" action="." class="forms-sample mt-4">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-12 col-md-4 form-group pb-3">
+                <label>First Name </label>
+                <h5 class="mt-2">{{view_lab.patient.fname}}</h5>
+              </div>
+              <div class="col-12 col-md-8 form-group pb-3">
+                <label>Surname</label>
+                <h5 class="mt-2">{{rec_action.test_result}}</h5>
+              </div>
+              <div class="col-12 col-md-8 form-group pb-3">
+                <label>Surname</label>
+                <h5 class="mt-2">{{rec_action.patient_id.fname}}</h5>
+              </div>
+              <div class="col-12 col-md-8 form-group pb-3">
+                <label for="exampleInputPassword1">Recorded By</label>
+                <h5 class="mt-2">{{view_lab.created_by}}</h5>
+              </div><br />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+                

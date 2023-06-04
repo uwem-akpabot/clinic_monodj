@@ -13,9 +13,12 @@ urlpatterns = [
 	# path('request_drug_pharm/', views.request_drug_pharm, name='request_drug_pharm'),  
 
 	# #lab
-	path('record_labresult/', views.record_labresult, name='record_labresult'),
-    path('record_test_action/<int:record_lab_id>/', views.record_test_action, name='record_test_action'),
-    path('view_labresult/', views.view_labresult, name='view_labresult'),
+	path('labresult/', views.labresult, name='labresult'),
+    path('update_labresult/<int:req_labtest_id>/', views.update_labresult, name='update_labresult'),
+    path('view_labresult/<int:req_labtest_id>/', views.view_labresult, name='view_labresult'),
+
+    # path('view_test_action/<int:view_lab_id>/', views.view_test_action, name='view_test_action'),
+    
     #nurse
 	path('record_triage/', views.record_triage, name='record_triage'),
     path('view_triage/', views.view_triage, name='view_triage'),
