@@ -21,11 +21,10 @@
               {% include 'frontend/includes/select_patient_and_date.html' %}
               
               <input type="text" name="created_by" class="form-control" value="{{user.userprofile.first_name}} {{user.userprofile.last_name}}" style="display: none" />
-              <div class="col-6 form-group pb-3">
+              <div class="col-12 col-md-6 form-group pb-3">
                 <button class="btn btn-primary me-2">Save Record</button>
                 <button type="reset" class="btn btn-outline-secondary">Cancel</button>
-              </div>
-              <br />
+              </div><br />
             </div>
           </form>
         </div>

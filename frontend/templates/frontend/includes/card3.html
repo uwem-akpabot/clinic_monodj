@@ -1,0 +1,70 @@
+<div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
+    <div class="order-0 mb-4">
+    <div class="card h-100 bg-primary">
+        <div class="card-header d-flex align-items-center justify-content-between pb-0">
+        <div class="card-title mb-0">
+            <h4 class="m-0 me-2 text-white">Patients</h4>
+            <small class="text-white">42,980 Treatments</small>
+        </div>
+        <div class="dropdown">
+            <button
+            class="btn p-0"
+            type="button"
+            id="orederStatistics"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            >
+            <i class="bx bx-dots-vertical-rounded"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="orederStatistics">
+            <a class="dropdown-item" href="javascript:void(0);">Select All</a>
+            <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
+            <a class="dropdown-item" href="javascript:void(0);">Share</a>
+            </div>
+        </div>
+        </div>
+        <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3 text-white">
+            <div class="d-flex flex-column align-items-center gap-1">
+            <h2 class="mb-2 text-white">{{ patients }}</h2>
+            <span>Total Patients</span>
+            </div>
+            <div id="orderStatisticsChart"></div>
+        </div>
+        <ul class="p-0 m-0">
+            <li class="d-flex mb-4 pb-1">
+            <div class="avatar flex-shrink-0 me-3">
+                <span class="avatar-initial rounded bg-label-success"><i class="bx bx-closet"></i></span>
+            </div>
+            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                <div class="me-2">
+                <h6 class="mb-0 text-white">
+                    {{latest_patient.fname}} {{latest_patient.sname}}
+                </h6>
+                <small class="text-white">T-shirt, Jeans, Shoes</small>
+                </div>
+                <div class="user-progress">
+                <small class="fw-semibold text-white">23.8k</small>
+                </div>
+            </div>
+            </li>
+            <li class="d-flex mb-4 pb-1">
+            <div class="avatar flex-shrink-0 me-3">
+                <span class="avatar-initial rounded bg-label-info"><i class="bx bx-home-alt"></i></span>
+            </div>
+            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                <div class="me-2">
+                <h6 class="mb-0 text-white">{{second_patient.fname}} {{second_patient.sname}}</h6>
+                <small class="text-white">Fine Art, Dining</small>
+                </div>
+                <div class="user-progress">
+                <small class="fw-semibold text-white">849k</small>
+                </div>
+            </div>
+            </li>
+        </ul>
+        </div>
+    </div>
+  </div>
+</div> 

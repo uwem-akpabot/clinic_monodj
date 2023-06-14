@@ -6,6 +6,7 @@ from django.contrib import messages
 
 from userprofile.models import Userprofile
 from personnel.models import Doctor, LabScientist, Nurse, Pharmacist
+from record.models import RequestLabtest_Lab, RequestTriageNurse, SoapNotes
 from patient.models import Patient
 # from account.models import Company_account
 
@@ -19,8 +20,29 @@ def index(request):
 # 	return render(request, 'frontend/homepage.html', {'patients': patients, 'company': company})
 
 def dashboard(request):
-	patients = Patient.objects.all()
-	return render(request, 'frontend/dashboard.html', {'company': company})
+	patients = Patient.objects.count()
+	if patients > 0:
+		users = Userprofile.objects.count() + patients
+		reports = RequestLabtest_Lab.objects.count() + RequestTriageNurse.objects.count() + SoapNotes.objects.count()
+		latest_patient = Patient.objects.latest('id') # latest patient
+	else:
+		return 0
+
+	return render(request, 'frontend/dashboard.html', {'company': company, 'patients': patients, 
+		'users': users, 'reports': reports, 'latest_patient': latest_patient
+	})
+	
+	# count_tellers = Teller.objects.all() 
+	# count_managers = Manager.objects.all()
+	# count_users = count_patients.count() + count_tellers.count() + count_managers.count()
+
+	# company_account = Company_account.objects.latest('id')
+	# print(company_account)
+
+	# return render(request, 'frontend/dashboard.html', {'customers': customers, 'count_customers': count_customers, 
+	# 	'count_users': count_users, 'company_account': company_account, 'company': COMPANY})
+	
+	
 
 	# count_patients = Patient.objects.count()
 

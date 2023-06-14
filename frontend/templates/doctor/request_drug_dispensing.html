@@ -24,47 +24,46 @@
                 <textarea name="diagnosis" class="form-control" placeholder="Diagnosis" required></textarea>
                 <small id="emailHelp" class="form-text text-muted"><span class="text-danger">Required. </span></small>
               </div>
-
               <div class="form-row"> 
                 <div class="row custom-checkboxes px-2 text-dark">
-                  <div class="col-4 form-group pb-3">
+                  <div class="col-12 col-md-4 form-group pb-3">
                     <h6 className="seofct-icon pb-0 mb-0"><i class="fa fa-flask"></i> <b>Medicine</b></h6>
                     <input type="text" class="chkcvalues form-control" placeholder="Paracetamol" />
                   </div>
-                  <div class="col-8 form-group pb-3">
+                  <div class="col-12 col-md-8 form-group pb-3">
                     <h6 className="seofct-icon pb-0 mb-0"><i class="fa fa-flask"></i> <b>Dosage</b></h6>
                     <div class="row">
-                      <div class="col-3">
+                      <div class="col-6 col-md-3">
                         <input type="checkbox" value="1x daily" class="chkcvalues2" />
                         <label for="exampleInputUsername1"> &nbsp; 1x daily</label>
                       </div>
-                      <div class="col-3">
+                      <div class="col-6 col-md-3">
                         <input type="checkbox" value="2x daily" class="chkcvalues2" />
                         <label for="exampleInputUsername1"> &nbsp; 2x daily</label>
                       </div>
-                      <div class="col-3">
+                      <div class="col-6 col-md-3">
                         <input type="checkbox" value="3x daily" class="chkcvalues2" />
                         <label for="exampleInputUsername1"> &nbsp; 3x daily</label>
                       </div>
-                      <div class="col-3">
+                      <div class="col-6 col-md-3">
                         <input type="checkbox" value="Morning" class="chkcvalues2" />
                         <label for="exampleInputUsername1"> &nbsp; Morning</label>
                       </div>
-                      <div class="col-3">
+                      <div class="col-6 col-md-3">
                         <input type="checkbox" value="Night" class="chkcvalues2" />
                         <label for="exampleInputUsername1"> &nbsp; Night</label>
                       </div>
-                      <div class="col-3">
+                      <div class="col-6 col-md-3">
                         <input type="checkbox" value="Before meal" class="chkcvalues2" />
                         <label for="exampleInputUsername1"> &nbsp; Before meal</label>
                       </div>
-                      <div class="col-3">
+                      <div class="col-6 col-md-3">
                         <input type="checkbox" value="After meal" class="chkcvalues2" />
                         <label for="exampleInputUsername1"> &nbsp; After meal</label>
                       </div>
                     </div>
                   </div>
-                  <div class="col-2 form-group">
+                  <div class="col-6 col-md-2 form-group">
                     <button class="chkcbtn btn btn-success btn-sm">+ Add to list</button>
                   </div>
                 </div>
@@ -79,14 +78,11 @@
               
             {% include 'frontend/includes/select_patient_and_date.html' %}
             </div>
-
-            
             <input type="text" name="created_by" class="form-control" value="{{user.userprofile.first_name}} {{user.userprofile.last_name}}" style="display: none" />
-            <div class="col-6 form-group pb-3">
+            <div class="col-12 col-md-6 form-group pb-3">
               <button class="btn btn-primary me-2">Save Record</button>
               <button type="reset" class="btn btn-outline-secondary">Cancel</button>
-            </div>
-            <br />
+            </div><br />
           </form>
         </div>
       </div>
