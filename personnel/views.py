@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from patient.models import Patient
-from record.models import SoapNotes, Triage, RequestLabtest_Lab, RequestDrugDispensing
+from record.models import SoapNotes, Triage, RequestLabtest_Lab, RequestDrugDispensing, RequestTriageNurse
 from record.forms import WriteNoteForm, RecordTriageForm, RequestLabtestLabForm, RequestDrugDispensingForm, RequestTriageNurseForm
 from django.contrib import messages
 
@@ -34,27 +34,41 @@ def view_notes_soap(request):
 		
 #Nurse
 @login_required
-def record_triage(request):
-	patients = Patient.objects.all()
+def triage(request):
+	triages = RequestTriageNurse.objects.all()
+	return render(request,'nurse/triage.html', {'company':company, 'triages': triages})
 
-	if request.method == 'POST':
-		form = RecordTriageForm(request.POST) 
-		if form.is_valid():
-			form_valid(request, form, 'TRIAGE', 'Successful!')
-			# additional codes here
-			return redirect('record_triage')
-		else:
-			form_not_valid()
-	else:
-		form = RecordTriageForm() 
-	
-	pass_data = {'form': form, 'company':company, 'patients':patients}
-	return render(request, 'nurse/record_triage.html', pass_data)
-
+# Nurse
 @login_required
-def view_triage(request):
-	triages = Triage.objects.all()
-	return render(request,'nurse/view_triage.html', {'company':company, 'triages': triages})
+def update_triage(request, req_triage_id):
+	req_triage = RequestTriageNurse.objects.get(pk=req_triage_id)
+	form = RequestTriageNurseForm(instance=req_triage)
+
+	if request.method == "POST":
+		form = RequestTriageNurseForm(request.POST, instance=req_triage) 
+
+		if form.is_valid():
+			form.save() 
+
+			msg_title = 'Updated!'
+			msg_text = 'Triage is saved successfully!'
+			messages.add_message(request, messages.SUCCESS, msg_text, extra_tags=msg_title)
+			return redirect('triage')
+		else:
+			print(form.errors)
+			msg_title = 'Error!'
+			msg_text = 'Record was NOT saved!'
+			messages.add_message(request, messages.ERROR, msg_text, extra_tags=msg_title)
+	else:
+		form = RequestTriageNurseForm() 
+	return render(request, 'nurse/update_triage.html', {'form': form, 'company':company, 'req_triage': req_triage})
+
+# Nurse and Doctor
+@login_required
+def view_triage(request, req_triage_id):
+	view_triage = RequestTriageNurse.objects.get(pk=req_triage_id)
+	return render(request,'nurse/view_triage.html', {'company':company, 'view_triage': view_triage})
+
 
 # Pharmacist
 @login_required

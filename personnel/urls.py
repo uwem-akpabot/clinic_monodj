@@ -15,8 +15,9 @@ urlpatterns = [
     path('view_labresult/<int:req_labtest_id>/', views.view_labresult, name='view_labresult'),
 
     #nurse
-	path('record_triage/', views.record_triage, name='record_triage'),
-    path('view_triage/', views.view_triage, name='view_triage'),
+	path('triage/', views.triage, name='triage'),
+    path('update_triage/<int:req_triage_id>/', views.update_triage, name='update_triage'),
+    path('view_triage/<int:req_triage_id>/', views.view_triage, name='view_triage'),
     
     # #pharm
 	path('dispense_drugs/', views.dispense_drugs, name='dispense_drugs'),

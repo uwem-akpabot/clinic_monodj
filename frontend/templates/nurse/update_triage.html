@@ -1,0 +1,103 @@
+{% extends 'frontend/base.html' %}
+
+{% block title %}Update Lab Result{% endblock %}
+{% load static %}
+
+{% block content %}
+<script defer src="{% static 'js/recordtest_action.js' %}"></script>
+
+<!-- Doctors, Labs and Admins -->
+{% if user.userprofile.is_lab or user.userprofile.is_admin %}
+<div class="content-wrapper">
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+      <div class="col-xl">
+        <div class="card mb-4">
+          <div class="card-body">      
+            <h4 class="card-title">Update Lab Result / <small class="text-primary">{{company|slice:"0:19"}}</small></h4> 
+            <div class="col-12 form-group pb-0 pt-2">
+              <label class="mb-1 lead"><u><b>Lab. tests to be conducted</b> for patient {{req_labtest.patient.fname}} 
+                {{req_labtest.patient.sname}}</u> (as requested by Doctor)</label>
+              <p class="text-primary lead"><b>{{req_labtest.tests}}</b></p>
+            </div>
+
+            <div class="row">      
+              <b>INSTRUCTIONS: </b><br />
+              <span class="text-danger"><i>- In the TEST field, enter each Test from the "list of lab tests" above. <br />
+                - In the RESULT field, enter the corresponding Test Result<br />
+                - Click the button "Add to list". <br />
+                - After all requested tests have been added, fill out the rest of the form and "Save Record". </i><br />
+              </span>. 
+              <p class="card-description lead text-success my-1 mt-0 pt-0"><b>Record test action</b></p>
+            
+              <div class="row text-dark">
+                <div class="col-12 col-md-4 form-group pb-3">
+                  <label>Test</label>
+                  <input type="text" class="chkcvalues form-control" placeholder="Uric Acid" />
+                </div>
+                <div class="col-12 col-md-4 form-group pb-3">
+                  <label>Result</label>
+                  <input type="text" class="chkcvalues2 form-control" placeholder="12.5%" />
+                </div>
+                <div class="col-12 col-md-3 form-group"><br />
+                  <button class="chkcbtn btn btn-success mb-4">+ Add to list</button>
+                </div>
+              </div>
+            </div>
+
+            <form method="POST" action="." class="forms-sample">
+              {% csrf_token %}
+            
+            <div class="row">
+              <div class="col-12 col-md-10 mb-4">
+                <label className="seofct-icon pb-0 mb-0">Tests and Results that you have entered are automatically enlisted here</label> 
+                <textarea name="tests" id="txtvalues" class="form-control" rows="4" required>{{req_labtest.tests}}</textarea>
+                <small id="emailHelp" class="form-text text-muted"><span class="text-danger">Required. </span> You can manually add more tests/results and separate each with comma</small>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-4 form-group pb-3">
+                <label class="mb-1"><b>Patient </b>visited on </label>
+                <input type="text" class="form-control" value="{{req_labtest.patient.fname}} {{req_labtest.patient.sname}}" readonly />
+                <input type="text" name="patient" class="form-control" value="{{req_labtest.patient_id}}" style="display: none" />
+              </div>
+              <div class="col-12 col-md-3 form-group pb-3">
+                <label class="mb-1"><b>Requested By</b></label>
+                <input type="text" name="created_by" class="form-control" value="{{req_labtest.created_by}}" readonly />
+              </div>
+              <div class="col-12 col-md-2 form-group pb-3">
+                <label class="mb-1"><b>Date of visit</b></label>
+                <input type="text" name="date_of_visit" class="form-control" value="{{req_labtest.date_of_visit}}" readonly />
+              </div>
+              <div class="col-12 col-md-3 form-group pb-3">
+                <label class="mb-1"><b>Requested On</b></label>
+                <input type="text" class="form-control" value="{{req_labtest.created_at}}" readonly />
+              </div>
+            </div>
+            <div class="row">
+              <!-- <input type="text" name="patient" class="form-control" value="{{req_labtest.patient.id}}" style="display: none" />
+              <input type="text" name="requestlabtest_lab" class="form-control" value="{{req_labtest.id}}" style="display: none" />
+              <input type="text" name="created_by" class="form-control" value="{{user.userprofile.first_name}} {{user.userprofile.last_name}}" style="display: none" /> -->
+              <div class="col-12 col-md-6 form-group pb-3">
+                <button class="btn btn-primary me-2">Save Record</button>
+                <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+              </div><br />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+{% else %}
+  {% include 'frontend/includes/page_unauthorized.html' %}
+{% endif %}
+
+{% endblock %}
+
+
+  <!-- {{record_lab.id}} for specific task entry (out of many) for patient -->
+  <!-- {{record_lab.patient.fname}} for specific patient details -->
+  <!-- <input type="text" name="patient" class="form-control" value="{{record_lab.patient.id}}" />
+  <input type="text" name="test" class="form-control" value="{{record_lab.id}}" /> -->
