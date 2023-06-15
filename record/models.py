@@ -32,30 +32,11 @@ class Triage(models.Model):
 	created_by = models.CharField(max_length=15)
 	created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
-class DispenseDrugs(models.Model):
-	patient = models.ForeignKey(Patient, related_name='dispense_drug', on_delete=models.CASCADE)
-	date_of_visit = models.CharField(max_length=15)
-	diagnosis = models.TextField()
-	medicine_1 = models.CharField(max_length=40)
-	med1_dose = models.CharField(max_length=15)
-	medicine_2 = models.CharField(max_length=40, blank=True)
-	med2_dose = models.CharField(max_length=15, blank=True)
-	medicine_3 = models.CharField(max_length=40, blank=True)
-	med3_dose = models.CharField(max_length=15, blank=True)
-	medicine_4 = models.CharField(max_length=40, blank=True)
-	med4_dose = models.CharField(max_length=15, blank=True)
-	medicine_5 = models.CharField(max_length=40, blank=True)
-	med5_dose = models.CharField(max_length=15, blank=True)
-	medicine_6 = models.CharField(max_length=40, blank=True)
-	med6_dose = models.CharField(max_length=15, blank=True)
-	created_by = models.CharField(max_length=15)
-	created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-
-class RecordLabResult(models.Model):
-	patient = models.ForeignKey(Patient, related_name='record_labresult', on_delete=models.CASCADE)
-	date_of_visit = models.CharField(max_length=15)
-	created_by = models.CharField(max_length=15)
-	created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+# class RecordLabResult(models.Model):
+# 	patient = models.ForeignKey(Patient, related_name='record_labresult', on_delete=models.CASCADE)
+# 	date_of_visit = models.CharField(max_length=15)
+# 	created_by = models.CharField(max_length=15)
+# 	created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
 class RequestLabtest_Lab(models.Model):
 	patient = models.ForeignKey(Patient, related_name='request_labtest_lab', on_delete=models.CASCADE)
@@ -79,9 +60,9 @@ class RequestTriageNurse(models.Model):
 	created_by = models.CharField(max_length=15)
 	created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
-class RecordTestAction(models.Model):
-	patient = models.ForeignKey(Patient, related_name='record_testaction_pat', on_delete=models.CASCADE)
-	requestlabtest_lab = models.ForeignKey(RequestLabtest_Lab, related_name='requestlabtest_lab', on_delete=models.CASCADE)
-	test_result = models.TextField()
-	created_by = models.CharField(max_length=15)
+# class RecordTestAction(models.Model):
+# 	patient = models.ForeignKey(Patient, related_name='record_testaction_pat', on_delete=models.CASCADE)
+# 	requestlabtest_lab = models.ForeignKey(RequestLabtest_Lab, related_name='requestlabtest_lab', on_delete=models.CASCADE)
+# 	test_result = models.TextField()
+# 	created_by = models.CharField(max_length=15)
 	# created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
