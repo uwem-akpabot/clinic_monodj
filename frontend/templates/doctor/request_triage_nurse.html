@@ -25,6 +25,20 @@
                 <textarea name="comment" class="form-control" placeholder="Additional comment ... e.g. Take the vital signs only" required></textarea>
                 <small id="emailHelp" class="form-text text-muted"><span class="text-danger">Required. </span></small>
               </div>
+
+              <div>
+                <input type="text" name="temp" class="form-control" style="display: none" />
+                <input type="text" name="bp" class="form-control" style="display: none" />
+                <input type="text" name="pulse" class="form-control" style="display: none" />
+                <input type="text" name="respiration" class="form-control" style="display: none" />
+                <input type="text" name="spo2" class="form-control" style="display: none" />
+                <input type="text" name="lmp" class="form-control" style="display: none" />
+                <input type="text" name="weight" class="form-control" style="display: none" />
+                <input type="text" name="height" class="form-control" style="display: none" />
+                <input type="text" name="bmi" class="form-control" style="display: none" />
+                <textarea name="medication" class="form-control" style="display: none"></textarea>
+                <textarea name="nurse_report" class="form-control" style="display: none"></textarea>
+              </div>
             </div>
             
             <input type="text" name="created_by" class="form-control" value="{{user.userprofile.first_name}} {{user.userprofile.last_name}}" style="display: none" />

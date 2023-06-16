@@ -1,77 +1,112 @@
 {% extends 'frontend/base.html' %}
 
-{% block title %}Update Lab Result{% endblock %}
+{% block title %}Update Triage{% endblock %}
 {% load static %}
 
 {% block content %}
 <script defer src="{% static 'js/recordtest_action.js' %}"></script>
 
-<!-- Doctors, Labs and Admins -->
-{% if user.userprofile.is_lab or user.userprofile.is_admin %}
+<!-- Nurses and Admins -->
+{% if user.userprofile.is_nurse or user.userprofile.is_admin %}
 <div class="content-wrapper">
   <div class="container-xxl flex-grow-1 container-p-y">
     <div class="row">
       <div class="col-xl">
         <div class="card mb-4">
           <div class="card-body">      
-            <h4 class="card-title">Update Lab Result / <small class="text-primary">{{company|slice:"0:19"}}</small></h4> 
+            <h4 class="card-title">Update Triage / <small class="text-primary">{{company|slice:"0:19"}}</small></h4> 
             <div class="col-12 form-group pb-0 pt-2">
-              <label class="mb-1 lead"><u><b>Lab. tests to be conducted</b> for patient {{req_labtest.patient.fname}} 
-                {{req_labtest.patient.sname}}</u> (as requested by Doctor)</label>
-              <p class="text-primary lead"><b>{{req_labtest.tests}}</b></p>
+              <label class="mb-1 lead"><u><b>Nursing Triage to be carried out</b> for patient {{req_triage.patient.fname}} 
+                {{req_triage.patient.sname}}</u> (as requested by Doctor)</label>
             </div>
 
-            <div class="row">      
-              <b>INSTRUCTIONS: </b><br />
-              <span class="text-danger"><i>- In the TEST field, enter each Test from the "list of lab tests" above. <br />
-                - In the RESULT field, enter the corresponding Test Result<br />
-                - Click the button "Add to list". <br />
-                - After all requested tests have been added, fill out the rest of the form and "Save Record". </i><br />
-              </span>. 
-              <p class="card-description lead text-success my-1 mt-0 pt-0"><b>Record test action</b></p>
-            
-              <div class="row text-dark">
-                <div class="col-12 col-md-4 form-group pb-3">
-                  <label>Test</label>
-                  <input type="text" class="chkcvalues form-control" placeholder="Uric Acid" />
-                </div>
-                <div class="col-12 col-md-4 form-group pb-3">
-                  <label>Result</label>
-                  <input type="text" class="chkcvalues2 form-control" placeholder="12.5%" />
-                </div>
-                <div class="col-12 col-md-3 form-group"><br />
-                  <button class="chkcbtn btn btn-success mb-4">+ Add to list</button>
-                </div>
-              </div>
+            <div class="row">    
+              <p class="card-description lead text-success my-1 mt-0 pt-0"><b>Record triage</b></p>
             </div>
 
             <form method="POST" action="." class="forms-sample">
               {% csrf_token %}
-            
+
             <div class="row">
-              <div class="col-12 col-md-10 mb-4">
-                <label className="seofct-icon pb-0 mb-0">Tests and Results that you have entered are automatically enlisted here</label> 
-                <textarea name="tests" id="txtvalues" class="form-control" rows="4" required>{{req_labtest.tests}}</textarea>
-                <small id="emailHelp" class="form-text text-muted"><span class="text-danger">Required. </span> You can manually add more tests/results and separate each with comma</small>
+              <div class="col-12 col-md-12 form-group pb-3">
+                <label for="exampleInputUsername1">Comment/instruction to nurse </label>
+                <textarea name="comment" class="form-control" required>{{req_triage.comment}}</textarea>
+                <small id="emailHelp" class="form-text text-muted"><span class="text-danger">Required. </span></small>
+              </div>    
+              <div class="col-6 col-md-4 form-group pb-3">
+                <label for="exampleInputUsername1">Temperature </label>
+                <input type="text" name="temp" class="form-control" placeholder="Temperature" maxlength="12" />
+                <small id="emailHelp" class="form-text text-muted">Max. 12 characters</small>
+              </div>
+              <div class="col-6 col-md-4 form-group pb-3">
+                <label for="exampleInputUsername1">Blood Pressure </label>
+                <input type="text" name="bp" class="form-control" placeholder="Blood Pressure" maxlength="12" />
+                <small id="emailHelp" class="form-text text-muted">Max. 12 characters</small>
+              </div>
+
+              <div class="col-6 col-md-4 form-group pb-3">
+                <label for="exampleInputUsername1">Pulse </label>
+                <input type="text" name="pulse" class="form-control" placeholder="Pulse" maxlength="12" />
+                <small id="emailHelp" class="form-text text-muted">Max. 12 characters</small>
+              </div>
+              <div class="col-6 col-md-4 form-group pb-3">
+                <label for="exampleInputUsername1">Respiration </label>
+                <input type="text" name="respiration" class="form-control" placeholder="Respiration" maxlength="12" />
+                <small id="emailHelp" class="form-text text-muted">Max. 12 characters</small>
+              </div>
+              <div class="col-6 col-md-4 form-group pb-3">
+                <label for="exampleInputUsername1">SPO 2 </label>
+                <input type="text" name="spo2" class="form-control" placeholder="SPO 2" maxlength="12" />
+                <small id="emailHelp" class="form-text text-muted">Max. 12 characters</small>
+              </div>
+              <div class="col-6 col-md-4 form-group pb-3">
+                <label for="exampleInputUsername1">LMP </label>
+                <input type="text" name="lmp" class="form-control" placeholder="LMP" maxlength="12" />
+                <small id="emailHelp" class="form-text text-muted">Max. 12 characters</small>
+              </div>
+              <div class="col-6 col-md-4 form-group pb-3">
+                <label for="exampleInputUsername1">Weight (w)</label>
+                <input type="text" name="weight" class="form-control" placeholder="Weight" maxlength="12" />
+                <small id="emailHelp" class="form-text text-muted">Max. 12 characters</small>
+              </div>
+              <div class="col-6 col-md-4 form-group pb-3">
+                <label for="exampleInputUsername1">Height (h)</label>
+                <input type="text" name="height" class="form-control" placeholder="Height" maxlength="12" />
+                <small id="emailHelp" class="form-text text-muted">Max. 12 characters</small>
+              </div>
+              <div class="col-12 col-md-4 form-group pb-3">
+                <label for="exampleInputUsername1">Body Mass Index (w/h2)</label>
+                <input type="text" name="bmi" class="form-control" placeholder="Body Mass Index " maxlength="12" />
+                <small id="emailHelp" class="form-text text-muted">Max. 12 characters</small>
+              </div>
+              <div class="col-12 col-md-12 form-group pb-3">
+                <label for="exampleInputUsername1">Medication </label>
+                <textarea name="medication" class="form-control" placeholder="Medication"></textarea>
+                <small id="emailHelp" class="form-text text-muted"><span class="text-danger">Required. </span></small>
+              </div>
+              <div class="col-12 col-md-12 form-group pb-3">
+                <label for="exampleInputUsername1">Nurse Report </label>
+                <textarea name="nurse_report" class="form-control" placeholder="Nurse Report"></textarea>
+                <small id="emailHelp" class="form-text text-muted"><span class="text-danger">Required. </span></small>
               </div>
             </div>
             <div class="row">
               <div class="col-12 col-md-4 form-group pb-3">
                 <label class="mb-1"><b>Patient </b>visited on </label>
-                <input type="text" class="form-control" value="{{req_labtest.patient.fname}} {{req_labtest.patient.sname}}" readonly />
-                <input type="text" name="patient" class="form-control" value="{{req_labtest.patient_id}}" style="display: none" />
+                <input type="text" class="form-control" value="{{req_triage.patient.fname}} {{req_triage.patient.sname}}" readonly />
+                <input type="text" name="patient" class="form-control" value="{{req_triage.patient_id}}" style="display: none" />
               </div>
               <div class="col-12 col-md-3 form-group pb-3">
                 <label class="mb-1"><b>Requested By</b></label>
-                <input type="text" name="created_by" class="form-control" value="{{req_labtest.created_by}}" readonly />
+                <input type="text" name="created_by" class="form-control" value="{{req_triage.created_by}}" readonly />
               </div>
               <div class="col-12 col-md-2 form-group pb-3">
                 <label class="mb-1"><b>Date of visit</b></label>
-                <input type="text" name="date_of_visit" class="form-control" value="{{req_labtest.date_of_visit}}" readonly />
+                <input type="text" name="date_of_visit" class="form-control" value="{{req_triage.date_of_visit}}" readonly />
               </div>
               <div class="col-12 col-md-3 form-group pb-3">
                 <label class="mb-1"><b>Requested On</b></label>
-                <input type="text" class="form-control" value="{{req_labtest.created_at}}" readonly />
+                <input type="text" class="form-control" value="{{req_triage.created_at}}" readonly />
               </div>
             </div>
             <div class="row">

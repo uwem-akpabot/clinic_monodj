@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from patient.models import Patient
-from record.models import SoapNotes, Triage, RequestLabtest_Lab, RequestDrugDispensing, RequestTriageNurse
-from record.forms import WriteNoteForm, RecordTriageForm, RequestLabtestLabForm, RequestDrugDispensingForm, RequestTriageNurseForm
+from record.models import SoapNotes, RequestLabtest_Lab, RequestDrugDispensing, RequestTriageNurse
+from record.forms import WriteNoteForm, RequestLabtestLabForm, RequestDrugDispensingForm, RequestTriageNurseForm
 from django.contrib import messages
 
 company = "Beyond's Healthcare and Fertility Center"

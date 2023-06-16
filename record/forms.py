@@ -1,5 +1,5 @@
 from django import forms
-from .models import SoapNotes, Triage, RequestLabtest_Lab, RequestDrugDispensing, RequestTriageNurse
+from .models import SoapNotes, RequestLabtest_Lab, RequestDrugDispensing, RequestTriageNurse
 
 # Doctor
 class WriteNoteForm(forms.ModelForm):
@@ -8,13 +8,6 @@ class WriteNoteForm(forms.ModelForm):
 		fields = ['patient', 'date_of_visit', 'subjective', 'objective', 'assessment', 'plan', 
 	    	'comments', 'created_by']
 
-# Nurse
-class RecordTriageForm(forms.ModelForm):
-	class Meta:
-		model = Triage
-		fields = ['patient', 'date_of_visit', 'temp', 'bp', 'temp', 'pulse', 'respiration', 'spo2', 'lmp', 
-	    	'weight', 'height', 'bmi', 'medication', 'nurse_report', 'created_by']
-		
 # Pharmacist
 
 # Lab
@@ -39,7 +32,8 @@ class RequestDrugDispensingForm(forms.ModelForm):
 class RequestTriageNurseForm(forms.ModelForm):
 	class Meta:
 		model = RequestTriageNurse
-		fields = ['patient', 'date_of_visit', 'comment', 'created_by']
+		fields = ['patient', 'date_of_visit', 'comment', 'temp', 'bp', 'temp', 'pulse', 'respiration', 
+	    	'spo2', 'lmp', 'weight', 'height', 'bmi', 'medication', 'nurse_report','created_by']
 
 # # Lab
 # class RecordTestActionForm(forms.ModelForm):
